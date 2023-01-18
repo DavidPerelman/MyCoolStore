@@ -1,5 +1,4 @@
-import { useEffect, useState } from 'react';
-import { useCategoriesQuery } from './hooks/useCategoriesQuery';
+import { useContext, useEffect } from 'react';
 import Home from './pages/Home/Home';
 import NotFound from './pages/NotFound/NotFound';
 import ProductDetailsPage from './pages/ProductDetailsPage/ProductDetailsPage';
@@ -9,15 +8,11 @@ import {
   RouterProvider,
   createBrowserRouter,
   createRoutesFromElements,
-  Link,
 } from 'react-router-dom';
+import AuthContext from './store/auth-context';
+import { CartContextProvider } from './store/cart-context';
 
 function App() {
-  const [products, setProducts] = useState([]);
-  const { isLoading, isError, data: categories } = useCategoriesQuery();
-
-  useEffect(() => {}, []);
-
   const router = createBrowserRouter(
     createRoutesFromElements(
       <Route path='/' element={<Header />}>
@@ -29,11 +24,11 @@ function App() {
   );
 
   return (
-    <>
-      <div>
+    <div>
+      <CartContextProvider>
         <RouterProvider router={router}></RouterProvider>
-      </div>
-    </>
+      </CartContextProvider>
+    </div>
   );
 }
 

@@ -12,3 +12,11 @@
   font-weight: bold;
   text-decoration: none;
 }
+
+.icons {
+  justify-content: right;
+  display: flex;
+  flex-wrap: inherit;
+  align-items: center;
+  justify-content: space-between;
+}
