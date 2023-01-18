@@ -1,12 +1,12 @@
 const Product = require('../models/productModel');
 const Category = require('../models/categoryModel');
-// const data = require('../data');
+const data = require('../data');
 
 const getAllProducts = async (req, res) => {
   try {
     // get all products
-    // const products = await Product.find({});
-    res.json({ data });
+    const products = await Product.find({});
+    res.json({ products: products });
   } catch (err) {
     console.error(err);
     res.status(500).send();

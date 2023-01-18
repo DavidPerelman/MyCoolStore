@@ -1,32 +1,33 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { useProductsQuery } from '../../hooks/useProductsQuery';
-import data from '../../data';
 import classes from './Home.module.css';
 
 const Home = () => {
-  const { data: categories } = useProductsQuery();
-  console.log(categories);
+  const { data: products } = useProductsQuery();
+  console.log(products);
+
   return (
     <div>
       <h1>list products</h1>
       <div className={classes.products}>
-        {data.products.map((product) => (
-          <div className={classes.product} key={product.slug}>
-            <Link to={`/product/${product.slug}`}>
-              <img src={product.image} alt={product.name} />
-            </Link>
-            <div className={classes['product-info']}>
-              <Link to={`/product/${product.slug}`}>
-                <p>{product.name}</p>{' '}
+        {products &&
+          products.map((product) => (
+            <div className={classes.product} key={product.id}>
+              <Link to={`/product/${product.id}`}>
+                <img src={product.thumbnail} alt={product.title} />
               </Link>
-              <p>
-                <strong>${product.price}</strong>
-              </p>
-              <button>Add to cart</button>
+              <div className={classes['product-info']}>
+                <Link to={`/product/${product.id}`}>
+                  <p>{product.title}</p>{' '}
+                </Link>
+                <p>
+                  <strong>${product.price}</strong>
+                </p>
+                <button>Add to cart</button>
+              </div>
             </div>
-          </div>
-        ))}
+          ))}
       </div>
     </div>
   );
