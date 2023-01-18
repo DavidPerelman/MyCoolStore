@@ -1,4 +1,4 @@
-import React, { createContext, useState } from 'react';
+import React, { createContext, useEffect, useState } from 'react';
 import {
   getAuth,
   createUserWithEmailAndPassword,
@@ -47,6 +47,7 @@ export const AuthContextProvider = (props) => {
     const unSubscribeAuth = onAuthStateChanged(
       auth,
       async (authenticatedUser) => {
+        console.log(authenticatedUser);
         if (authenticatedUser) {
           setCurrentUser(authenticatedUser);
         } else {
@@ -54,8 +55,6 @@ export const AuthContextProvider = (props) => {
         }
       }
     );
-
-    return unSubscribeAuth;
   };
 
   const signup = async (username, email, password) => {
@@ -111,6 +110,10 @@ export const AuthContextProvider = (props) => {
   const logout = async () => {
     return getAuth().signOut();
   };
+
+  useEffect(() => {
+    console.log(checkLoggedIn());
+  }, []);
 
   const contextValue = {
     userModalIsShown: userModalIsShown,

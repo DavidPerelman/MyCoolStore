@@ -11,8 +11,13 @@ import {
 } from 'react-router-dom';
 import AuthContext from './store/auth-context';
 import { CartContextProvider } from './store/cart-context';
+import { getAuth } from 'firebase/auth';
 
 function App() {
+  const context = useContext(AuthContext);
+  const isLoggedIn = getAuth().currentUser;
+
+  console.log(context);
   const router = createBrowserRouter(
     createRoutesFromElements(
       <Route path='/' element={<Header />}>
