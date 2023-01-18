@@ -3,6 +3,7 @@
   flex-direction: column;
   justify-content: center;
   margin-top: 6.5rem;
+  align-items: center;
 }
 .spinner:after {
   content: ' ';

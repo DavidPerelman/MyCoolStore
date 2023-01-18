@@ -1,3 +1,16 @@
+.row {
+  width: 100%;
+  align-items: center;
+  margin: 0;
+}
+
 .img-large {
   max-width: 100%;
+}
+
+@media only screen and (max-width: 800px) {
+  .row {
+    flex-direction: column;
+    align-items: center;
+  }
 }
