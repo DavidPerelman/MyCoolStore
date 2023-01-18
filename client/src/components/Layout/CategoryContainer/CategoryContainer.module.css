@@ -11,3 +11,9 @@ main h1 {
   flex-wrap: wrap;
   justify-content: center;
 }
+
+@media only screen and (max-width: 800px) {
+  .Row {
+    gap: 1rem;
+  }
+}

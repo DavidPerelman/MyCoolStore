@@ -1,23 +1,26 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import classes from './ProductCard.module.css';
+import Card from 'react-bootstrap/Card';
+import Button from 'react-bootstrap/Button';
 
 const ProductCard = ({ product }) => {
   return (
-    <div className={classes.product} key={product.id}>
+    <Card>
       <Link to={`/product/${product.id}`}>
-        <img src={product.thumbnail} alt={product.title} />
+        <img
+          src={product.thumbnail}
+          className='card-img-top'
+          alt={product.title}
+        />
       </Link>
-      <div className={classes['product-info']}>
+      <Card.Body>
         <Link to={`/product/${product.id}`}>
-          <p>{product.title}</p>{' '}
+          <Card.Title>{product.title}</Card.Title>
         </Link>
-        <p>
-          <strong>${product.price}</strong>
-        </p>
-        <button>Add to cart</button>
-      </div>
-    </div>
+        <Card.Text>${product.price}</Card.Text>
+        <Button>Add to cart</Button>
+      </Card.Body>
+    </Card>
   );
 };
 
