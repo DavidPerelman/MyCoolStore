@@ -24,9 +24,10 @@ export const fetchProduct = async (productId) => {
 
 export const fetchAllProductsByCategory = async (categoryId) => {
   //   console.log('Fetching product');
-  const response = await axios.get(
-    `${process.env.REACT_APP_API}/api/products/category/${categoryId}`
-  );
+  // const response = await axios.get(
+  //   `${process.env.REACT_APP_API}/api/products/category/${categoryId}`
+  // );
+  const response = await axios.get(`${process.env.REACT_APP_API}/api/products`);
   const products = response.data.products;
 
   // console.log('Product: ', products);

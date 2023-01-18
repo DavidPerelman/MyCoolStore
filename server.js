@@ -5,7 +5,7 @@ const path = require('path');
 const dotenv = require('dotenv');
 const bodyParser = require('body-parser');
 const corsOptions = require('./config/corsOptions');
-
+const data = require('./data.js');
 const connectDB = require('./config/connectDB');
 
 dotenv.config();
