@@ -3,7 +3,7 @@ import { useCategoriesQuery } from './hooks/useCategoriesQuery';
 import Home from './pages/Home/Home';
 import NotFound from './pages/NotFound/NotFound';
 import ProductDetailsPage from './pages/ProductDetailsPage/ProductDetailsPage';
-import Header from './components/Header/Header';
+import Header from './components/Layout/Header/Header';
 import {
   Route,
   RouterProvider,
