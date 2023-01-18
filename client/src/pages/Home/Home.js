@@ -1,6 +1,7 @@
 import React from 'react';
 import { useCategoriesQuery } from '../../hooks/useCategoriesQuery';
 import CategoryContainer from '../../components/Layout/CategoryContainer/CategoryContainer';
+import Container from 'react-bootstrap/Container';
 
 const Home = () => {
   const { isLoading, isError, data: categories } = useCategoriesQuery();
@@ -13,12 +14,15 @@ const Home = () => {
   }
 
   return (
-    <main>
-      {categories?.categories.map((category, i) => {
-        return <CategoryContainer key={i} category={category} />;
-      })}
+    <>
+      <Container>
+        {categories?.categories.map((category, i) => {
+          return <CategoryContainer key={i} category={category} />;
+        })}
+      </Container>
+
       {/* <div className={classes.products}>{content}</div> */}
-    </main>
+    </>
   );
 };
 

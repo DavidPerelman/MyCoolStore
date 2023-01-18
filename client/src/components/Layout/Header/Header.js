@@ -7,7 +7,7 @@ import { LinkContainer } from 'react-router-bootstrap';
 
 const Header = () => {
   return (
-    <>
+    <div className='d-flex flex-column site-container'>
       <header className={classes.header}>
         <Navbar className={classes.header}>
           <Container>
@@ -17,8 +17,11 @@ const Header = () => {
           </Container>
         </Navbar>
       </header>
-      <Outlet />
-    </>
+      <main>
+        <Outlet />
+      </main>
+      <footer>footer</footer>
+    </div>
   );
 };
 
