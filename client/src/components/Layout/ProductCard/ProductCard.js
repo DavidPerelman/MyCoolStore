@@ -3,10 +3,11 @@ import { Link } from 'react-router-dom';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 import Rating from '../../UI/Rating/Rating';
+import classes from './ProductCard.module.css';
 
 const ProductCard = ({ product }) => {
   return (
-    <Card>
+    <Card className={classes.card}>
       <Link to={`/product/${product._id}`}>
         <img
           src={product.thumbnail}
@@ -14,7 +15,7 @@ const ProductCard = ({ product }) => {
           alt={product.title}
         />
       </Link>
-      <Card.Body>
+      <Card.Body className={classes['card-body']}>
         <Link to={`/product/${product._id}`}>
           <Card.Title>{product.title}</Card.Title>
         </Link>

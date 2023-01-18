@@ -34,7 +34,7 @@ const CategoryContainer = ({ category }) => {
   }
 
   return (
-    <div>
+    <div className={classes.CategoryContainer}>
       <h1>
         Our {category.name.charAt(0).toUpperCase() + category.name.slice(1)}
       </h1>
