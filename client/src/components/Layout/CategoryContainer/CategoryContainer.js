@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom';
 import { useContainerProductsQuery } from '../../../hooks/useProductsQuery';
 import LoadingSpinner from '../../UI/LoadingSpinner/LoadingSpinner';
 import classes from './CategoryContainer.module.css';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
 
 const CategoryContainer = ({ category }) => {
   const {
@@ -16,20 +18,22 @@ const CategoryContainer = ({ category }) => {
   if (products && products.length > 0) {
     content = products.map((product) => {
       return (
-        <div className={classes.product} key={product.id}>
-          <Link to={`/product/${product.id}`}>
-            <img src={product.thumbnail} alt={product.title} />
-          </Link>
-          <div className={classes['product-info']}>
+        <Col sm={6} md={4} lg={3}>
+          <div className={classes.product} key={product.id}>
             <Link to={`/product/${product.id}`}>
-              <p>{product.title}</p>{' '}
+              <img src={product.thumbnail} alt={product.title} />
             </Link>
-            <p>
-              <strong>${product.price}</strong>
-            </p>
-            <button>Add to cart</button>
+            <div className={classes['product-info']}>
+              <Link to={`/product/${product.id}`}>
+                <p>{product.title}</p>{' '}
+              </Link>
+              <p>
+                <strong>${product.price}</strong>
+              </p>
+              <button>Add to cart</button>
+            </div>
           </div>
-        </div>
+        </Col>
       );
     });
   }
@@ -49,7 +53,9 @@ const CategoryContainer = ({ category }) => {
       <h1>
         Our {category.name.charAt(0).toUpperCase() + category.name.slice(1)}
       </h1>
-      <div className={classes.products}>{content}</div>
+      <div className={classes.products}>
+        <Row>{content}</Row>
+      </div>
     </div>
   );
 };

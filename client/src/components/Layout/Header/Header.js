@@ -12,7 +12,9 @@ const Header = () => {
         <Navbar className={classes.header}>
           <Container>
             <LinkContainer to='/'>
-              <Navbar.Brand>MyCoolStore</Navbar.Brand>
+              <Navbar.Brand className={classes['site-title']}>
+                MyCoolStore
+              </Navbar.Brand>
             </LinkContainer>
           </Container>
         </Navbar>

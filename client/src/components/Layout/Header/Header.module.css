@@ -1,5 +1,10 @@
 .header {
   background-color: #8a2b06;
+  color: #ffffff !important;
+}
+
+.site-title {
+  color: #ffffff !important;
 }
 
 .header a {
