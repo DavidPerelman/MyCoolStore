@@ -5,6 +5,7 @@ import LoadingSpinner from '../../UI/LoadingSpinner/LoadingSpinner';
 import classes from './CategoryContainer.module.css';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
+import ProductCard from '../ProductCard/ProductCard';
 
 const CategoryContainer = ({ category }) => {
   const {
@@ -19,20 +20,7 @@ const CategoryContainer = ({ category }) => {
     content = products.map((product) => {
       return (
         <Col sm={6} md={4} lg={3}>
-          <div className={classes.product} key={product.id}>
-            <Link to={`/product/${product.id}`}>
-              <img src={product.thumbnail} alt={product.title} />
-            </Link>
-            <div className={classes['product-info']}>
-              <Link to={`/product/${product.id}`}>
-                <p>{product.title}</p>{' '}
-              </Link>
-              <p>
-                <strong>${product.price}</strong>
-              </p>
-              <button>Add to cart</button>
-            </div>
-          </div>
+          <ProductCard product={product} />
         </Col>
       );
     });
