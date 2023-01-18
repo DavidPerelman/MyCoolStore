@@ -20,22 +20,33 @@ const ProductDetailsPage = () => {
 
   if (product) {
     content = (
-      <Row className={classes.row}>
-        <Col>
-          <ListGroup variant='flush'>
-            <ListGroup.Item>
-              <h1>{product.title}</h1>
-            </ListGroup.Item>
-            <ListGroup.Item>
-              <Rating rating={product.rating} />
-            </ListGroup.Item>
-            <ListGroup.Item>Price : ${product.price}</ListGroup.Item>
-          </ListGroup>
-        </Col>
-        <Col>
-          <Carousel images={product.images} />
-        </Col>
-      </Row>
+      <Card className={classes.card}>
+        <Row className={classes.row}>
+          <Col>
+            <ListGroup variant='flush'>
+              <ListGroup.Item>
+                <p>{product.brand}</p>
+              </ListGroup.Item>
+              <ListGroup.Item>
+                <h1>{product.title}</h1>
+              </ListGroup.Item>
+              <ListGroup.Item>
+                <p>{product.category}</p>
+              </ListGroup.Item>
+              <ListGroup.Item>
+                <p>{product.description}</p>
+              </ListGroup.Item>
+              <ListGroup.Item>
+                <Rating rating={product.rating} />
+              </ListGroup.Item>
+              <ListGroup.Item>Price : ${product.price}</ListGroup.Item>
+            </ListGroup>
+          </Col>
+          <Col>
+            <Carousel images={product.images} />
+          </Col>
+        </Row>
+      </Card>
     );
   }
 
@@ -54,7 +65,7 @@ const ProductDetailsPage = () => {
   console.log(product);
 
   return (
-    <div>
+    <div className={classes.ProductDetailsPage}>
       {content}
       {/* <Container>{content}</Container> */}
     </div>

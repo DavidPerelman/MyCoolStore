@@ -1,3 +1,11 @@
+.ProductDetailsPage {
+  width: 98%;
+}
+
+.card {
+  margin: 1rem;
+}
+
 .row {
   width: 100%;
   align-items: center;

@@ -6,6 +6,7 @@
   height: 19rem;
   /* width: 90%; */
   align-self: center;
+  padding: 0.1rem;
 }
 
 .carouselInner {
