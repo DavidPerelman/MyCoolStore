@@ -4,7 +4,7 @@ export const fetchCategories = async () => {
   // console.log('Fetching categories');
   // const response = await axios.get('/api/categories');
   const response = await axios.get(
-    `${process.env.REACT_APP_API}/api/categories`
+    `https://prussian-blue-xerus-cuff.cyclic.app/api/categories`
   );
   const categories = response.data;
 
@@ -17,7 +17,7 @@ export const fetchCategories = async () => {
 export const fetchCategory = async (categoryId) => {
   // console.log('Fetching categories');
   const response = await axios.get(
-    `${process.env.REACT_APP_API}/api/categories/${categoryId}`
+    `https://prussian-blue-xerus-cuff.cyclic.app/api/categories/${categoryId}`
   );
   const category = response.data.category.name;
 
