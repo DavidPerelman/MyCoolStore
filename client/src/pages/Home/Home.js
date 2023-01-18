@@ -20,8 +20,6 @@ const Home = () => {
           return <CategoryContainer key={i} category={category} />;
         })}
       </Container>
-
-      {/* <div className={classes.products}>{content}</div> */}
     </>
   );
 };

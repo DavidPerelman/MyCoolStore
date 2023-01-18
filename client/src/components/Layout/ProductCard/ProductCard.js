@@ -7,7 +7,7 @@ import Rating from '../../UI/Rating/Rating';
 const ProductCard = ({ product }) => {
   return (
     <Card>
-      <Link to={`/product/${product.id}`}>
+      <Link to={`/product/${product._id}`}>
         <img
           src={product.thumbnail}
           className='card-img-top'
@@ -15,9 +15,9 @@ const ProductCard = ({ product }) => {
         />
       </Link>
       <Card.Body>
-        <Link to={`/product/${product.id}`}>
+        <Link to={`/product/${product._id}`}>
           <Card.Title>{product.title}</Card.Title>
-        </Link>{' '}
+        </Link>
         <Rating rating={product.rating} />
         <Card.Text>${product.price}</Card.Text>
         <Button>Add to cart</Button>

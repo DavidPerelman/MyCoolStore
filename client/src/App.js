@@ -22,7 +22,7 @@ function App() {
     createRoutesFromElements(
       <Route path='/' element={<Header />}>
         <Route index element={<Home />} errorElement={<NotFound />} exact />
-        <Route path='/product/:slug' element={<ProductDetailsPage />} />
+        <Route path='/product/:productId' element={<ProductDetailsPage />} />
         <Route path='/*' element={<NotFound />} />
       </Route>
     )
