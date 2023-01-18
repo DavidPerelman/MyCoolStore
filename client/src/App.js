@@ -2,6 +2,15 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useCategoriesQuery } from './hooks/useCategoriesQuery';
 import data from './data.js';
+import Home from './pages/Home/Home';
+import NotFound from './pages/NotFound/NotFound';
+import ProductDetailsPage from './pages/ProductDetailsPage/ProductDetailsPage';
+import {
+  Route,
+  RouterProvider,
+  createBrowserRouter,
+  createRoutesFromElements,
+} from 'react-router-dom';
 
 function App() {
   const [products, setProducts] = useState([]);
@@ -11,33 +20,28 @@ function App() {
     console.log(data);
   }, []);
 
+  const router = createBrowserRouter(
+    createRoutesFromElements(
+      <>
+        {' '}
+        <Route index element={<Home />} errorElement={<NotFound />} exact />
+        <Route path='/product/:slug' element={<ProductDetailsPage />} />
+        <Route path='/*' element={<NotFound />} />
+      </>
+    )
+  );
+
   return (
-    <div>
-      <header>
-        <a href='/'>MyCoolStore</a>
-      </header>
-      <main>
-        <h1>list products</h1>
-        <div className='products'>
-          {data.products.map((product) => (
-            <div className='product' key={product.slug}>
-              <a href={`/product/${product.slug}`}>
-                <img src={product.image} alt={product.name} />
-              </a>
-              <div className='product-info'>
-                <a href={`/product/${product.slug}`}>
-                  <p>{product.name}</p>{' '}
-                </a>
-                <p>
-                  <strong>${product.price}</strong>
-                </p>
-                <button>Add to cart</button>
-              </div>
-            </div>
-          ))}
-        </div>
-      </main>
-    </div>
+    <>
+      <div>
+        <header>
+          <a href='/'>MyCoolStore</a>
+        </header>
+        <main>
+          <RouterProvider router={router}></RouterProvider>
+        </main>
+      </div>
+    </>
   );
 }
 
