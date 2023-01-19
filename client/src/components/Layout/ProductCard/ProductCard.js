@@ -23,8 +23,6 @@ const ProductCard = ({ product }) => {
     existingCartItemId = Object.values(existingCartItem)[0]._id;
   }
 
-  console.log(existingCartItemId);
-
   const addToCartHandler = () => {
     cartCtx.addItem(product);
   };

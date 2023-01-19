@@ -14,7 +14,6 @@ export const useProductsQuery = (categoryId) => {
 };
 
 export const useContainerProductsQuery = (categoryId) => {
-  console.log(categoryId);
   const products = useQuery(['products', categoryId], () => {
     const result = fetchContainerProductsByCategory(categoryId);
     return result;
