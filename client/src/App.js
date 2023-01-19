@@ -10,8 +10,15 @@ import {
 } from 'react-router-dom';
 import { CartContextProvider } from './store/cart-context';
 import CategoryProductsPage from './pages/CategoryProductsPage/CategoryProductsPage';
+import { useContext } from 'react';
+import AuthContext from './store/auth-context';
+import ProfileDashboard from './pages/ProfileDashboard/ProfileDashboard';
+import MyOrders from './pages/MyOrders/MyOrders';
 
 function App() {
+  const authCtx = useContext(AuthContext);
+  const isLoggedIn = authCtx.currentUser !== null;
+
   const router = createBrowserRouter(
     createRoutesFromElements(
       <Route path='/' element={<Header />}>
@@ -22,6 +29,12 @@ function App() {
           element={<CategoryProductsPage />}
           exact
         />
+        {isLoggedIn && (
+          <Route path='/:userId/my-orders' element={<MyOrders />} />
+        )}
+        {isLoggedIn && (
+          <Route path='/:userId/dashboard' element={<ProfileDashboard />} />
+        )}
         <Route path='/*' element={<NotFound />} />
       </Route>
     )
