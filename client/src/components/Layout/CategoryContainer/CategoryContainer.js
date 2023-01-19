@@ -5,6 +5,7 @@ import classes from './CategoryContainer.module.css';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import ProductCard from '../ProductCard/ProductCard';
+import Button from 'react-bootstrap/esm/Button';
 
 const CategoryContainer = ({ category }) => {
   const {
@@ -35,9 +36,11 @@ const CategoryContainer = ({ category }) => {
 
   return (
     <div className={classes.CategoryContainer}>
-      <h1>
-        Our {category.name.charAt(0).toUpperCase() + category.name.slice(1)}
-      </h1>
+      <div className={classes['categories-button']}>
+        <Button>
+          Our {category.name.charAt(0).toUpperCase() + category.name.slice(1)}
+        </Button>
+      </div>
       <div className={classes.products}>
         <Row className={classes.Row}>{content}</Row>
       </div>
