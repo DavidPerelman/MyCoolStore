@@ -69,7 +69,7 @@ const Header = () => {
           </div>
         </Navbar>
       </header>
-      <main>
+      <main className={classes.main}>
         <Outlet />
       </main>
       <footer>footer</footer>
