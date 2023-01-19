@@ -6,15 +6,11 @@ import Container from 'react-bootstrap/Container';
 import { LinkContainer } from 'react-router-bootstrap';
 import Icon from '../../UI/Icon/Icon';
 import AuthContext from '../../../store/auth-context';
-import { getAuth } from 'firebase/auth';
 import CartContext from '../../../store/cart-context';
 import Cart from '../../Cart/Cart/Cart';
 import User from '../../Users/User/User';
 
 const Header = () => {
-  // const isLoggedIn = getAuth().currentUser;
-  // console.log(isLoggedIn);
-
   const authCtx = useContext(AuthContext);
   const cartCtx = useContext(CartContext);
   const isLoggedIn = authCtx.currentUser;
@@ -32,12 +28,8 @@ const Header = () => {
   };
 
   const closeUserModalHandler = () => {
-    console.log('dsd');
-    console.log(authCtx.userModalIsShown);
     authCtx.hideUserModal();
   };
-
-  console.log(cartCtx);
 
   return (
     <div className='d-flex flex-column site-container'>
@@ -58,7 +50,7 @@ const Header = () => {
             <Icon
               type='fa-shopping-cart'
               count={true}
-              amount={0}
+              amount={cartCtx.items.length}
               onClick={showCartHandler}
             />
             <Icon

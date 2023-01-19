@@ -36,7 +36,6 @@ const Register = ({
     }, 500);
 
     return () => {
-      console.log('CLEANUP');
       clearTimeout(identifier);
     };
   }, [

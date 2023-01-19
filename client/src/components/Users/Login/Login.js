@@ -15,7 +15,6 @@ const Login = ({
 
   useEffect(() => {
     const identifier = setTimeout(() => {
-      console.log('Checkin form validaty');
       setFormIsValid(
         enteredLoginEmail.includes('@') &&
           enteredLoginPassword.trim().length > 6
@@ -23,7 +22,6 @@ const Login = ({
     }, 500);
 
     return () => {
-      console.log('CLEANUP');
       clearTimeout(identifier);
     };
   }, [enteredLoginEmail, enteredLoginPassword]);
