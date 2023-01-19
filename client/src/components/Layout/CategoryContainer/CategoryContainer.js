@@ -6,8 +6,11 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import ProductCard from '../ProductCard/ProductCard';
 import Button from 'react-bootstrap/esm/Button';
+import { useNavigate } from 'react-router-dom';
 
 const CategoryContainer = ({ category }) => {
+  const navigate = useNavigate();
+
   const {
     isLoading,
     error,
@@ -34,10 +37,14 @@ const CategoryContainer = ({ category }) => {
     content = <LoadingSpinner />;
   }
 
+  const onCategoryClick = () => {
+    navigate(`/products/${category._id}`);
+  };
+
   return (
     <div className={classes.CategoryContainer}>
       <div className={classes['categories-button']}>
-        <Button>
+        <Button onClick={onCategoryClick}>
           Our {category.name.charAt(0).toUpperCase() + category.name.slice(1)}
         </Button>
       </div>

@@ -9,6 +9,7 @@ import {
   createRoutesFromElements,
 } from 'react-router-dom';
 import { CartContextProvider } from './store/cart-context';
+import CategoryProductsPage from './pages/CategoryProductsPage/CategoryProductsPage';
 
 function App() {
   const router = createBrowserRouter(
@@ -16,6 +17,11 @@ function App() {
       <Route path='/' element={<Header />}>
         <Route index element={<Home />} errorElement={<NotFound />} exact />
         <Route path='/product/:productId' element={<ProductDetailsPage />} />
+        <Route
+          path='/products/:categoryId'
+          element={<CategoryProductsPage />}
+          exact
+        />
         <Route path='/*' element={<NotFound />} />
       </Route>
     )
