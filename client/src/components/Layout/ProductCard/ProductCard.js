@@ -5,10 +5,29 @@ import Button from 'react-bootstrap/Button';
 import Rating from '../../UI/Rating/Rating';
 import classes from './ProductCard.module.css';
 import CartContext from '../../../store/cart-context';
+import Icon from '../../UI/Icon/Icon';
 
 const ProductCard = ({ product }) => {
   const cartCtx = useContext(CartContext);
-  console.log(cartCtx);
+
+  const price = `$${product.price.toFixed(2)}`;
+
+  const existingCartItemIndex = cartCtx.items.findIndex((cartItem) => {
+    return product._id === cartItem.product._id;
+  });
+
+  const existingCartItem = cartCtx.items[existingCartItemIndex];
+  let existingCartItemId;
+
+  if (existingCartItem) {
+    existingCartItemId = Object.values(existingCartItem)[0]._id;
+  }
+
+  console.log(existingCartItemId);
+
+  const addToCartHandler = () => {
+    cartCtx.addItem(product);
+  };
 
   return (
     <Card className={classes.card}>
@@ -26,14 +45,18 @@ const ProductCard = ({ product }) => {
           </Card.Title>
         </Link>
         <Rating rating={product.rating} />
-        <Card.Text>${product.price}</Card.Text>
-        <Button
-          onClick={() => {
-            cartCtx.addItem(product);
-          }}
-        >
-          Add to cart
-        </Button>
+        <Card.Body className={classes['card-footer']}>
+          <Card.Text>{price}</Card.Text>
+          {existingCartItemId !== product._id ? (
+            <Icon
+              type='fa-solid fa-cart-plus'
+              onClick={(e) => addToCartHandler(e)}
+              size='lg'
+            />
+          ) : (
+            <span className={classes['in-cart']}>In Cart</span>
+          )}
+        </Card.Body>
       </Card.Body>
     </Card>
   );
