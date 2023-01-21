@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { useSingleProductQuery } from '../../hooks/useProductsQuery';
 import LoadingSpinner from '../../components/UI/LoadingSpinner/LoadingSpinner';
 import Row from 'react-bootstrap/Row';
@@ -18,6 +18,7 @@ const ProductDetailsPage = () => {
   const { productId } = useParams();
   const { isLoading, error, data: product } = useSingleProductQuery(productId);
   const cartCtx = useContext(CartContext);
+  const navigate = useNavigate();
 
   const price = `$${product && product.price.toFixed(2)}`;
   const existingCartItemIndex = cartCtx.items.findIndex((cartItem) => {
@@ -35,6 +36,10 @@ const ProductDetailsPage = () => {
     cartCtx.addItem(product);
   };
 
+  const onCategoryClick = () => {
+    navigate(`/products/${product.category._id}`);
+  };
+
   let content;
 
   if (product) {
@@ -48,13 +53,17 @@ const ProductDetailsPage = () => {
               >
                 <Icon type='fa-brands fa-font-awesome' size='2xs' />
                 {product.brand}
-                {/* <p>{product.brand}</p> */}
               </ListGroup.Item>
               <ListGroup.Item>
                 <h1>{product.title}</h1>
               </ListGroup.Item>
               <ListGroup.Item className={classes['list-group-item']}>
-                <p>{product.category}</p>
+                <p
+                  className={classes['category-name']}
+                  onClick={onCategoryClick}
+                >
+                  {product.category.name}
+                </p>
               </ListGroup.Item>
               <ListGroup.Item className={classes['list-group-item']}>
                 <p>{product.description}</p>
@@ -100,14 +109,7 @@ const ProductDetailsPage = () => {
     );
   }
 
-  console.log(product);
-
-  return (
-    <div className={classes.ProductDetailsPage}>
-      {content}
-      {/* <Container>{content}</Container> */}
-    </div>
-  );
+  return <div className={classes.ProductDetailsPage}>{content}</div>;
 };
 
 export default ProductDetailsPage;

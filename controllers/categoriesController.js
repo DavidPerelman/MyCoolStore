@@ -12,13 +12,11 @@ const getAllCategories = async (req, res) => {
 };
 
 const getCategory = async (req, res) => {
-  console.log('getCategory');
   try {
     // get all categories
     const categoryId = req.params.categoryId;
     const category = await Category.findById(categoryId).exec();
 
-    console.log(category);
     // return;
     res.json({ category: category });
   } catch (err) {

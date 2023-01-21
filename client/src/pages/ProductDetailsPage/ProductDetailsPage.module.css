@@ -49,6 +49,12 @@
   font-weight: 400;
 }
 
+.category-name {
+  text-decoration: underline;
+  color: blue;
+  cursor: pointer;
+}
+
 @media only screen and (max-width: 800px) {
   .row {
     flex-direction: column;
