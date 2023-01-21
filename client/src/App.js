@@ -10,7 +10,7 @@ import {
 } from 'react-router-dom';
 import { CartContextProvider } from './store/cart-context';
 import CategoryProductsPage from './pages/CategoryProductsPage/CategoryProductsPage';
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 import AuthContext from './store/auth-context';
 import ProfileDashboard from './pages/ProfileDashboard/ProfileDashboard';
 import MyOrders from './pages/MyOrders/MyOrders';

@@ -19,7 +19,9 @@ export const fetchProduct = async (productId) => {
 };
 
 export const fetchAllProductsByCategory = async (categoryId) => {
-  const response = await axios.get(`${process.env.REACT_APP_API}/api/products`);
+  const response = await axios.get(
+    `${process.env.REACT_APP_API}/api/products/category/${categoryId}`
+  );
   const products = response.data.products;
 
   return products;

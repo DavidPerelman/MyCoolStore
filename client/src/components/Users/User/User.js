@@ -1,11 +1,12 @@
-import { getAuth } from 'firebase/auth';
-import React from 'react';
+import React, { useContext } from 'react';
+import AuthContext from '../../../store/auth-context';
 import AuthForm from '../../Auth/AuthForm/AuthForm';
 import LoggedInLayout from '../../Layout/LoggedInLayout/LoggedInLayout';
 import Modal from '../../UI/Modal/Modal';
 
 const User = ({ onCloseUserModal }) => {
-  const isLoggedIn = getAuth().currentUser;
+  const authCtx = useContext(AuthContext);
+  const isLoggedIn = authCtx.currentUser;
   console.log(isLoggedIn);
 
   return (

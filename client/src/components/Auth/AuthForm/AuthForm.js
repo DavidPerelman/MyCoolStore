@@ -1,10 +1,7 @@
 import { useContext, useRef, useState } from 'react';
 import AuthContext from '../../../store/auth-context';
 import classes from './AuthForm.module.css';
-import { getAuth } from 'firebase/auth';
 import LoggedInLayout from '../../Layout/LoggedInLayout/LoggedInLayout';
-import { addDoc, collection } from 'firebase/firestore';
-import { db } from '../../../firebase';
 
 const AuthForm = ({ onCloseUserModal }) => {
   // const navigate = useNavigate();
@@ -14,7 +11,7 @@ const AuthForm = ({ onCloseUserModal }) => {
   const usernameInputRef = useRef();
   const emailInputRef = useRef();
   const passwordInputRef = useRef();
-  const isLoggedIn = getAuth().currentUser;
+  const isLoggedIn = authCtx.currentUser;
   const [error, setError] = useState(null);
 
   const switchAuthModeHandler = () => {
