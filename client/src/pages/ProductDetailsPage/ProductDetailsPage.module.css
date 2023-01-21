@@ -16,6 +16,39 @@
   max-width: 100%;
 }
 
+.list-group-item p {
+  margin-bottom: 0;
+}
+
+.brand {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.brand h4 {
+  width: 25px;
+}
+
+.price-list-group {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  place-content: space-between;
+}
+
+.price-list-group h4 {
+  margin-bottom: 0;
+}
+
+.in-cart {
+  background-color: limegreen;
+  padding: 5px;
+  border-radius: 5px;
+  font-size: 20px;
+  font-weight: 400;
+}
+
 @media only screen and (max-width: 800px) {
   .row {
     flex-direction: column;

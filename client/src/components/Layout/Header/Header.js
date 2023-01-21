@@ -52,11 +52,13 @@ const Header = () => {
               count={true}
               amount={cartCtx.items.length}
               onClick={showCartHandler}
+              size='lg'
             />
             <Icon
               type='fa-user'
               onClick={showUserModalHandler}
               isLoggedIn={isLoggedIn}
+              size='lg'
             />
           </div>
         </Navbar>
