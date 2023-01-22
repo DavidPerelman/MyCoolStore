@@ -6,7 +6,10 @@ const ProductItem = ({ product }) => {
 
   return (
     <li className={classes.product}>
-      <div>
+      <div className={classes.image}>
+        <img src={product.thumbnail} alt={product.title} />
+      </div>
+      <div className={classes.content}>
         <h3>{product.title}</h3>
         <div className={classes.description}>{product.description}</div>
         <div className={classes.price}>{price}</div>
