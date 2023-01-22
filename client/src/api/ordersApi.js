@@ -23,7 +23,7 @@ export const createOrder = async (userId, orderData) => {
 };
 
 export const fetchUserOrders = async (userId) => {
-  const response = await axios.post(
+  const response = await axios.get(
     `${process.env.REACT_APP_API}/api/orders/${userId}/all`
   );
   const orders = response.data.orders;

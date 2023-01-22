@@ -28,4 +28,21 @@ const createOrder = async (req, res) => {
   }
 };
 
-module.exports = { createOrder };
+const getAllUserOrder = async (req, res) => {
+  try {
+    const { userId } = req.params;
+
+    const orders = await Order.find({ user: userId })
+      .populate('products.product')
+      .exec();
+
+    console.log(orders);
+
+    res.json({ orders: orders });
+  } catch (err) {
+    console.error(err);
+    res.status(500).send();
+  }
+};
+
+module.exports = { createOrder, getAllUserOrder };

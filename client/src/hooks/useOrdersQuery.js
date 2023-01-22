@@ -2,6 +2,7 @@ import { useMutation, useQuery, useQueryClient } from 'react-query';
 import { fetchUserOrders } from '../api/ordersApi';
 
 export const useGetAllUserOrders = (userId) => {
+  console.log(userId);
   const orders = useQuery(['orders', userId], () => {
     const result = fetchUserOrders(userId);
     return result;

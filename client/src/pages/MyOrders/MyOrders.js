@@ -6,11 +6,7 @@ import { useGetAllUserOrders } from '../../hooks/useOrdersQuery';
 const MyOrders = () => {
   const { userId } = useParams();
 
-  console.log(userId);
-
   const { isLoading, error, data: orders } = useGetAllUserOrders(userId);
-
-  console.log(orders);
 
   return (
     <div>
