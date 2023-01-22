@@ -30,6 +30,9 @@ app.use('/api/categories', categoriesRouter);
 const productsRouter = require('./routers/productsRouter');
 app.use('/api/products', productsRouter);
 
+const ordersRouter = require('./routers/ordersRouter');
+app.use('/api/orders', ordersRouter);
+
 app.get('/', function (req, res) {
   res.send('<h1>Hello Server</h1>');
 });

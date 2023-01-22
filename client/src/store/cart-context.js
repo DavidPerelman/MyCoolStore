@@ -1,4 +1,5 @@
 import React, { createContext, useEffect, useState } from 'react';
+import { createOrder } from '../api/ordersApi';
 import useLocalStorage from '../hooks/use-local-storage';
 
 const cartCtx = createContext({
@@ -104,8 +105,7 @@ export const CartContextProvider = (props) => {
   };
 
   const makeAnOrderClick = (currentUser, cartItems) => {
-    console.log(currentUser.uid);
-    console.log(cartItems);
+    createOrder(currentUser.uid, cartItems);
   };
 
   const contextValue = {

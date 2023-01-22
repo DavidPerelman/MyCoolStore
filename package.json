@@ -26,6 +26,7 @@
     "mongoose": "^6.8.4",
     "morgan": "^1.10.0",
     "react-data-table-component": "^7.5.3",
-    "styled-components": "^5.3.6"
+    "styled-components": "^5.3.6",
+    "uuid": "^9.0.0"
   }
 }

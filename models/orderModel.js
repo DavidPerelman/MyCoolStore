@@ -5,12 +5,11 @@ const Product = require('./productModel');
 
 const orderSchema = new mongoose.Schema({
   orderNumber: {
-    type: Number,
+    type: String,
     required: true,
   },
   user: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'User',
+    type: String,
     required: true,
   },
   created: {
@@ -60,7 +59,5 @@ const orderSchema = new mongoose.Schema({
     default: 'Open',
   },
 });
-
-// status - created | inprogress completed
 
 module.exports = mongoose.model('Order', orderSchema);
