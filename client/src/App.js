@@ -14,6 +14,7 @@ import { useContext, useEffect } from 'react';
 import AuthContext from './store/auth-context';
 import ProfileDashboard from './pages/ProfileDashboard/ProfileDashboard';
 import MyOrders from './pages/MyOrders/MyOrders';
+import OrderDetailsPage from './pages/OrderDetailsPage/OrderDetailsPage';
 
 function App() {
   const authCtx = useContext(AuthContext);
@@ -31,6 +32,9 @@ function App() {
         />
         {isLoggedIn && (
           <Route path='/:userId/my-orders' element={<MyOrders />} />
+        )}
+        {isLoggedIn && (
+          <Route path='/order/:orderId' element={<OrderDetailsPage />} />
         )}
         {isLoggedIn && (
           <Route path='/:userId/dashboard' element={<ProfileDashboard />} />

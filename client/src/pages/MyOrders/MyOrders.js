@@ -1,5 +1,5 @@
 import React, { useRef, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import Table from '../../components/UI/Table/Table';
 import { useGetAllUserOrders } from '../../hooks/useOrdersQuery';
 import classes from './MyOrders.module.css';
@@ -8,6 +8,7 @@ const MyOrders = () => {
   const filterInputRef = useRef();
   const [filterText, setFilterText] = useState('');
 
+  const navigate = useNavigate();
   const { userId } = useParams();
 
   const { isLoading, error, data: orders } = useGetAllUserOrders(userId);
@@ -67,6 +68,7 @@ const MyOrders = () => {
 
   const rowClickedHandler = (e) => {
     console.log(e.id);
+    navigate(`/order/${e.id}`);
   };
 
   const handleChange = (e) => {

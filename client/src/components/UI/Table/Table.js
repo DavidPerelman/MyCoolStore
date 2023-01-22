@@ -26,6 +26,7 @@ const Table = ({
   const customStyles = {
     rows: {
       style: {
+        cursor: 'pointer',
         // fontSize: '25px',
         // fontWeight: 'bold',
         // backgroundColor: 'red',
@@ -35,8 +36,6 @@ const Table = ({
       style: {
         backgroundColor: 'grey',
         fontSize: '1rem',
-        // paddingLeft: '8px',
-        // paddingRight: '8px',
         textAlign: 'center',
       },
     },
