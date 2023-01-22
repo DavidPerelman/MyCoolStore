@@ -7,6 +7,14 @@ const Table = ({ columns, tableData, isLoading }) => {
     console.log(selectedRows);
   };
 
+  const disabledCriteria = (selectedRows) => {
+    if (selectedRows.isOpen === true) {
+      return false;
+    } else {
+      return true;
+    }
+  };
+
   return (
     <>
       <DataTable
@@ -18,6 +26,7 @@ const Table = ({ columns, tableData, isLoading }) => {
         // defaultSortFieldId={1}
         selectableRows={true}
         onSelectedRowsChange={handleSelected}
+        selectableRowDisabled={disabledCriteria}
       />
     </>
   );
