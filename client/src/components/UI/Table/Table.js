@@ -1,8 +1,15 @@
-import React, { useState } from 'react';
+import React from 'react';
 import DataTable from 'react-data-table-component';
-import LoadingSpinner from '../LoadingSpinner/LoadingSpinner';
+import Filtering from '../Filtering/Filtering';
 
-const Table = ({ columns, tableData, isLoading }) => {
+const Table = ({
+  columns,
+  tableData,
+  isLoading,
+  handleClear,
+  handleChange,
+  filterInputRef,
+}) => {
   const handleSelected = ({ selectedRows }) => {
     console.log(selectedRows);
   };
@@ -17,6 +24,11 @@ const Table = ({ columns, tableData, isLoading }) => {
 
   return (
     <>
+      <Filtering
+        handleChange={handleChange}
+        handleClear={handleClear}
+        filterInputRef={filterInputRef}
+      />
       <DataTable
         columns={columns}
         data={tableData}

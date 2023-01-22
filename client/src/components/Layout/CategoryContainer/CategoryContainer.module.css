@@ -2,20 +2,6 @@
   margin-top: 1rem;
 }
 
-main {
-  flex: 1;
-  display: flex;
-  align-items: center;
-  width: 100%;
-  align-self: center;
-  place-content: center;
-  margin-top: 3rem;
-}
-
-main h1 {
-  text-align: center;
-}
-
 .products {
   display: flex;
   flex-wrap: wrap;

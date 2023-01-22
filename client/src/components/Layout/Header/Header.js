@@ -66,7 +66,7 @@ const Header = () => {
       <main className={classes.main}>
         <Outlet />
       </main>
-      <footer>footer</footer>
+      {/* <footer>footer</footer> */}
     </div>
   );
 };
