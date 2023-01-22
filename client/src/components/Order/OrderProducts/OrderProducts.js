@@ -1,10 +1,12 @@
 import React from 'react';
+import ProductItem from '../ProductItem/ProductItem';
 import classes from './OrderProducts.module.css';
 
 const OrderProducts = ({ products }) => {
   console.log(products);
   const productsList =
-    products && products.map((product) => <li>{product.product.title}</li>);
+    products &&
+    products.map((product) => <ProductItem product={product.product} />);
 
   return (
     <section>
