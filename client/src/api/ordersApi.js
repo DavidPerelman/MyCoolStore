@@ -30,3 +30,12 @@ export const fetchUserOrders = async (userId) => {
 
   return orders;
 };
+
+export const fetchSingleOrderData = async (orderId) => {
+  const response = await axios.get(
+    `${process.env.REACT_APP_API}/api/orders/${orderId}/get`
+  );
+  const order = response.data.order;
+
+  return order;
+};

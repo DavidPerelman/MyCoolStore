@@ -1,5 +1,5 @@
 import { useMutation, useQuery, useQueryClient } from 'react-query';
-import { fetchUserOrders } from '../api/ordersApi';
+import { fetchUserOrders, fetchSingleOrderData } from '../api/ordersApi';
 
 export const useGetAllUserOrders = (userId) => {
   const orders = useQuery(['orders', userId], () => {
@@ -7,6 +7,14 @@ export const useGetAllUserOrders = (userId) => {
     return result;
   });
   return orders;
+};
+
+export const useGetSingleOrder = (orderId) => {
+  const order = useQuery(['order', orderId], () => {
+    const result = fetchSingleOrderData(orderId);
+    return result;
+  });
+  return order;
 };
 
 // const useOrder = (orderId) => {
