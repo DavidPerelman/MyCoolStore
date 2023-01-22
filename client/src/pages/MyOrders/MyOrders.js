@@ -19,7 +19,7 @@ const MyOrders = () => {
       name: 'Created',
       selector: (row) => row.created,
       sortable: true,
-      id: 1,
+      // id: 1,
     },
     // {
     //   name: 'Products',

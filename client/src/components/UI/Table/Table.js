@@ -3,7 +3,10 @@ import DataTable from 'react-data-table-component';
 import LoadingSpinner from '../LoadingSpinner/LoadingSpinner';
 
 const Table = ({ columns, tableData, isLoading }) => {
-  //   return;
+  const handleSelected = ({ selectedRows }) => {
+    console.log(selectedRows);
+  };
+
   return (
     <>
       <DataTable
@@ -12,7 +15,9 @@ const Table = ({ columns, tableData, isLoading }) => {
         fixedHeader={true}
         fixedHeaderScrollHeight='300px'
         progressPending={isLoading}
-        defaultSortFieldId={1}
+        // defaultSortFieldId={1}
+        selectableRows={true}
+        onSelectedRowsChange={handleSelected}
       />
     </>
   );
