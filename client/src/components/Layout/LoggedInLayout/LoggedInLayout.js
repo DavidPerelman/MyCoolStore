@@ -10,9 +10,14 @@ const LoggedInLayout = ({ onCloseUserModal }) => {
 
   const navigate = useNavigate();
 
+  const onMyOrdersHandler = () => {
+    authCtx.hideUserModal();
+    navigate(`/${uid}/my-orders`);
+  };
+
   const onEditProfileHandler = () => {
     authCtx.hideUserModal();
-    navigate(`/${uid}/dashboard`);
+    navigate(`/${uid}/profile-setting`);
   };
 
   const onLogoutHandler = () => {
@@ -25,6 +30,14 @@ const LoggedInLayout = ({ onCloseUserModal }) => {
   return (
     <div className={classes.LoggedInLayout}>
       <h1>Hello {displayName !== null ? displayName : ''}!</h1>
+      <Button
+        onClick={onMyOrdersHandler}
+        className={classes.button}
+        background='#540d83'
+        color='white'
+      >
+        My Orders
+      </Button>
       <Button
         onClick={onEditProfileHandler}
         className={classes.button}
