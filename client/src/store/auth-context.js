@@ -47,7 +47,6 @@ export const AuthContextProvider = (props) => {
     const unSubscribeAuth = onAuthStateChanged(
       auth,
       async (authenticatedUser) => {
-        console.log(authenticatedUser);
         if (authenticatedUser) {
           setCurrentUser(authenticatedUser);
         } else {
@@ -112,7 +111,7 @@ export const AuthContextProvider = (props) => {
   };
 
   useEffect(() => {
-    console.log(checkLoggedIn());
+    checkLoggedIn();
   }, []);
 
   const contextValue = {

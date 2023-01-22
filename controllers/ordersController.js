@@ -36,8 +36,6 @@ const getAllUserOrder = async (req, res) => {
       .populate('products.product')
       .exec();
 
-    console.log(orders);
-
     res.json({ orders: orders });
   } catch (err) {
     console.error(err);
