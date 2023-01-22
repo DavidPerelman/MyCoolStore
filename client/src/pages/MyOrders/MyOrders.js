@@ -18,6 +18,8 @@ const MyOrders = () => {
     {
       name: 'Created',
       selector: (row) => row.created,
+      sortable: true,
+      id: 1,
     },
     // {
     //   name: 'Products',
@@ -26,14 +28,17 @@ const MyOrders = () => {
     {
       name: 'Total',
       selector: (row) => row.totalPayment,
+      sortable: true,
     },
-    {
-      name: 'Is Paid',
-      selector: (row) => row.isPaid.isPaid,
-    },
+    // {
+    //   name: 'Is Paid',
+    //   selector: (row) => row.isPaid.isPaid,
+    //   sortable: true,
+    // },
     {
       name: 'Status',
       selector: (row) => row.status,
+      sortable: true,
     },
   ];
 

@@ -12,6 +12,7 @@ const Table = ({ columns, tableData, isLoading }) => {
         fixedHeader={true}
         fixedHeaderScrollHeight='300px'
         progressPending={isLoading}
+        defaultSortFieldId={1}
       />
     </>
   );
