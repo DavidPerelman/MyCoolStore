@@ -57,12 +57,17 @@ const MyOrders = () => {
     orders &&
     orders.filter(filter).map((order) => {
       return {
+        id: order._id,
         orderNumber: order.orderNumber,
         created: order.created,
         totalPayment: order.totalPayment,
         status: order.status,
       };
     });
+
+  const rowClickedHandler = (e) => {
+    console.log(e.id);
+  };
 
   const handleChange = (e) => {
     setFilterText(e.target.value);
@@ -88,6 +93,7 @@ const MyOrders = () => {
         // filterText={filterText}
         handleChange={handleChange}
         handleClear={handleClear}
+        rowClickedHandler={rowClickedHandler}
       />
     </div>
   );

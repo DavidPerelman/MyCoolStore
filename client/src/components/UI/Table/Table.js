@@ -9,6 +9,7 @@ const Table = ({
   handleClear,
   handleChange,
   filterInputRef,
+  rowClickedHandler,
 }) => {
   const handleSelected = ({ selectedRows }) => {
     console.log(selectedRows);
@@ -20,6 +21,25 @@ const Table = ({
     } else {
       return true;
     }
+  };
+
+  const customStyles = {
+    rows: {
+      style: {
+        // fontSize: '25px',
+        // fontWeight: 'bold',
+        // backgroundColor: 'red',
+      },
+    },
+    headCells: {
+      style: {
+        backgroundColor: 'grey',
+        fontSize: '1rem',
+        // paddingLeft: '8px',
+        // paddingRight: '8px',
+        textAlign: 'center',
+      },
+    },
   };
 
   return (
@@ -39,6 +59,8 @@ const Table = ({
         selectableRows={true}
         onSelectedRowsChange={handleSelected}
         selectableRowDisabled={disabledCriteria}
+        customStyles={customStyles}
+        onRowClicked={rowClickedHandler}
       />
     </>
   );
