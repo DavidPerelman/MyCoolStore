@@ -1,7 +1,12 @@
 import React from 'react';
+import Table from '../../components/UI/Table/Table';
 
 const MyOrders = () => {
-  return <div>MyOrders</div>;
+  return (
+    <div>
+      <Table />
+    </div>
+  );
 };
 
 export default MyOrders;
