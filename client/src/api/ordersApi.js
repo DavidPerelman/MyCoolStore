@@ -13,10 +13,6 @@ export const createOrder = async (userId, orderData) => {
     });
   }
 
-  console.log(totalPayment);
-  console.log(userId);
-  console.log(data);
-
   const response = await axios.post(
     `${process.env.REACT_APP_API}/api/orders/${userId}/create`,
     { orderData: data, userId: userId, totalPayment: totalPayment }
@@ -24,4 +20,13 @@ export const createOrder = async (userId, orderData) => {
   const order = response.data.order;
 
   return order;
+};
+
+export const fetchUserOrders = async (userId) => {
+  const response = await axios.post(
+    `${process.env.REACT_APP_API}/api/orders/${userId}/all`
+  );
+  const orders = response.data.orders;
+
+  return orders;
 };
