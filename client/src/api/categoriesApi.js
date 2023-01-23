@@ -10,7 +10,7 @@ export const fetchCategories = async () => {
 
 export const fetchCategory = async (categoryId) => {
   const response = await axios.get(
-    `${process.env.REACT_APP_API}/api/categories/${categoryId}`
+    `${process.env.REACT_APP_API}/api/categories/getCategory/${categoryId}`
   );
 
   const category = response.data.category.name;

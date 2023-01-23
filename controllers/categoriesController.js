@@ -1,4 +1,5 @@
 const Category = require('../models/categoryModel');
+const products = require('../products.json');
 
 const getAllCategories = async (req, res) => {
   try {
@@ -37,4 +38,33 @@ const deleteAllCategories = async (req, res) => {
   }
 };
 
-module.exports = { getAllCategories, deleteAllCategories, getCategory };
+const createCategories = async (req, res) => {
+  try {
+    let array = [];
+
+    for (let i = 0; i < products.products.length; i++) {
+      if (!array.includes(products.products[i].category)) {
+        array.push(products.products[i].category);
+      }
+    }
+
+    for (let i = 0; i < array.length; i++) {
+      // create a new category
+      const newCategory = await new Category({
+        name: array[i],
+      }).save();
+    }
+
+    res.json({ categories: array });
+  } catch (err) {
+    console.error(err);
+    res.status(500).send();
+  }
+};
+
+module.exports = {
+  getAllCategories,
+  deleteAllCategories,
+  getCategory,
+  createCategories,
+};

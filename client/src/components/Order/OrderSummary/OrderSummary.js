@@ -8,11 +8,13 @@ const OrderSummary = ({
   onCancelEditClick,
   totalPayment,
 }) => {
+  const total = `$${totalPayment.toFixed(2)}`;
+
   return (
     <div className={classes.OrderSummary}>
       <div className={classes.total}>
-        <span>Total</span>
-        <span>{totalPayment}</span>
+        <span>Total:&nbsp;</span>
+        <span>{total}</span>
       </div>
       <div className={classes.actions}>
         {!editable ? (

@@ -22,19 +22,19 @@ const getEditProductsCategory = async (req, res) => {
       array.push(data[product]);
     }
 
-    console.log(array[0]);
     for (let i = 0; i < array[0].length; i++) {
+      console.log(array[0][i].category);
       const newProduct = await new Product({
         id: array[0][i].id,
         title: array[0][i].title,
         description: array[0][i].description,
         price: array[0][i].price,
         rating: array[0][i].rating,
-        stock: array[0][i].stock,
+        stock: 40,
         brand: array[0][i].brand,
         category: mongoose.Types.ObjectId(array[0][i].category),
         thumbnail: array[0][i].thumbnail,
-        images: array[0][i].images,
+        // images: array[0][i].images,
       }).save();
     }
     // get all products
@@ -47,7 +47,6 @@ const getEditProductsCategory = async (req, res) => {
 };
 
 const getAllProductsByCategory = async (req, res) => {
-  console.log('getAllProductsByCategory: ', req.params.categoryId);
   try {
     // get all products by category
     const categoryId = req.params.categoryId;
