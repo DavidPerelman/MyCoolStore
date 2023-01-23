@@ -9,11 +9,10 @@ const OrderProducts = ({ products }) => {
     products.map((product) => <ProductItem product={product.product} />);
 
   return (
-    <section>
-      <div className={classes.productsContainer}>
-        <ul>{productsList}</ul>
-      </div>
-    </section>
+    // <section>
+    //   <ul>{productsList}</ul>
+    // </section>
+    <ul className={classes.OrderProducts}>{productsList}</ul>
   );
 };
 

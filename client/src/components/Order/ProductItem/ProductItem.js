@@ -1,4 +1,5 @@
 import React from 'react';
+import ProductItemForm from '../ProductItemForm/ProductItemForm';
 import classes from './ProductItem.module.css';
 
 const ProductItem = ({ product }) => {
@@ -14,7 +15,9 @@ const ProductItem = ({ product }) => {
         <div className={classes.description}>{product.description}</div>
         <div className={classes.price}>{price}</div>
       </div>
-      <div></div>
+      <div>
+        <ProductItemForm />
+      </div>
     </li>
   );
 };

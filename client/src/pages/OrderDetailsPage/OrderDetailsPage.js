@@ -8,12 +8,16 @@ import classes from './OrderDetailsPage.module.css';
 const OrderDetailsPage = () => {
   const { orderId } = useParams();
   const { isLoading, error, data: order } = useGetSingleOrder(orderId);
-  //   console.log(order.products);
+  console.log(order);
 
   return (
     <div className={classes.OrderDetailsPage}>
-      <OrderProducts products={order && order.products} />
-      <OrderSummary />
+      <section>
+        <div className={classes.container}>
+          <OrderProducts products={order && order.products} />
+          <OrderSummary totalPayment={order && order.totalPayment} />
+        </div>
+      </section>
     </div>
   );
 };
