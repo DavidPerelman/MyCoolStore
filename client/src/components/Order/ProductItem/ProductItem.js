@@ -16,7 +16,7 @@ const ProductItem = ({ product, amount, editable, onAdd, onRemove }) => {
             alt={product.title}
           />
         </div>
-        <div>
+        <div className={classes.content}>
           <h3>{product.title}</h3>
           <div className={classes.description}>{product.description}</div>
           <div className={classes.summary}>
