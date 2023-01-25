@@ -9,6 +9,7 @@ import {
   createRoutesFromElements,
 } from 'react-router-dom';
 import { CartContextProvider } from './store/cart-context';
+import { OrderContextProvider } from './store/order-context';
 import CategoryProductsPage from './pages/CategoryProductsPage/CategoryProductsPage';
 import { useContext, useEffect } from 'react';
 import AuthContext from './store/auth-context';
@@ -46,9 +47,11 @@ function App() {
 
   return (
     <div>
-      <CartContextProvider>
-        <RouterProvider router={router}></RouterProvider>
-      </CartContextProvider>
+      <OrderContextProvider>
+        <CartContextProvider>
+          <RouterProvider router={router}></RouterProvider>
+        </CartContextProvider>
+      </OrderContextProvider>
     </div>
   );
 }

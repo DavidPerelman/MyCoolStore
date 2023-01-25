@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import OrderContext from '../../../store/order-context';
 import OrderProducts from '../OrderProducts/OrderProducts';
 import classes from './OrderSummary.module.css';
 
@@ -8,8 +9,15 @@ const OrderSummary = ({
   onCancelEditClick,
   totalPayment,
 }) => {
-  const total = `$${totalPayment && totalPayment.toFixed(2)}`;
+  const orderCtx = useContext(OrderContext);
 
+  const total = `$${
+    editable
+      ? orderCtx.totalAmount.toFixed(2)
+      : totalPayment && totalPayment.toFixed(2)
+  }`;
+
+  console.log(orderCtx.totalAmount);
   return (
     <div className={classes.OrderSummary}>
       <div className={classes.total}>

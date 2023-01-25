@@ -26,9 +26,10 @@ const Cart = ({ onCloseCart }) => {
 
   const cartItems = (
     <ul className={classes['cart-items']}>
-      {cartCtx.items.map((item) => {
+      {cartCtx.items.map((item, i) => {
         return (
           <CartItem
+            key={i}
             item={item}
             onAdd={cartItemAddHandler.bind(null, item)}
             onRemove={cartItemRemoveHandler.bind(null, item)}

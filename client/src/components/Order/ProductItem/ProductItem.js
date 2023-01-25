@@ -3,9 +3,9 @@ import ProductItemForm from '../ProductItemForm/ProductItemForm';
 import classes from './ProductItem.module.css';
 
 const ProductItem = ({ product, amount, editable, onAdd, onRemove }) => {
+  // console.log(product.productQuantity);
   const price = `$${product.price.toFixed(2)}`;
 
-  console.log(editable);
   return (
     <li key={product._id} className={classes.product}>
       <div className={classes['order-product-details']}>
