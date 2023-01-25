@@ -19,6 +19,8 @@ const OrderDetailsPage = () => {
   };
 
   const cancelEditOrderHandler = () => {
+    // orderCtx.cancelEdit(order.products);
+
     setEditable(false);
   };
 
@@ -27,7 +29,11 @@ const OrderDetailsPage = () => {
   if (order) {
     content = (
       <div className={classes.container}>
-        <OrderProducts products={order && order.products} editable={editable} />
+        <OrderProducts
+          products={editable ? orderCtx.copyOrderProducts : order.products}
+          editable={editable}
+        />
+        {/* <OrderProducts products={order && order.products} editable={editable} /> */}
         <OrderSummary
           editable={editable}
           totalPayment={order && order.totalPayment}

@@ -15,29 +15,29 @@ const OrderProducts = ({ products, editable }) => {
 
   const productItemRemoveHandler = (product) => {
     console.log(product);
-    // cartCtx.removeCartItemAmount(item);
+    orderCtx.removeOrderItemAmount(product);
   };
 
-  //   console.log(products);
-  // const productsList =
-  //   products &&
-  //   products.map((product, i) => (
-  //     <ProductItem
-  //       key={i}
-  //       product={product.product}
-  //       editable={editable}
-  //       amount={product.productQuantity}
-  //       onAdd={productItemAddHandler.bind(null, product)}
-  //       onRemove={productItemRemoveHandler.bind(null, product)}
-  //     />
-  //   ));
+  console.log(products);
+  const productsList =
+    products &&
+    products.map((product, i) => (
+      <ProductItem
+        key={i}
+        product={product.product}
+        editable={editable}
+        amount={product.productQuantity}
+        onAdd={productItemAddHandler.bind(null, product)}
+        onRemove={productItemRemoveHandler.bind(null, product)}
+      />
+    ));
 
   return (
     // <section>
     //   <ul>{productsList}</ul>
     // </section>
     <ul className={classes.OrderProducts}>
-      {editable
+      {/* {editable
         ? orderCtx &&
           orderCtx.copyOrderProducts.map((product, i) => (
             <>
@@ -61,7 +61,8 @@ const OrderProducts = ({ products, editable }) => {
               onAdd={productItemAddHandler.bind(null, product)}
               onRemove={productItemRemoveHandler.bind(null, product)}
             />
-          ))}
+          ))} */}
+      {productsList}
     </ul>
   );
 };

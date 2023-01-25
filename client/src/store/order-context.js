@@ -12,35 +12,33 @@ const orderCtx = createContext({
   makeOrderCopy: (id) => {},
   addOrderItemAmount: (id) => {},
   removeOrderItemAmount: (id) => {},
-  makeAnOrderClick: (userId) => {},
 });
 
 export const OrderContextProvider = (props) => {
-  const [totalCartCost, setTotalCartCost] = useState(0);
+  const [totalOrderCost, setTotalOrderCost] = useState(0);
   const [cartIsShown, setCartIsShown] = useState(false);
   // const [cartItems, setCartItems] = useLocalStorage('cartItems', []);
   const [copyOrder, setCopyOrder] = useState({});
   const [copyOrderProducts, setCopyOrderProducts] = useState([]);
 
   const makeOrderCopy = async (order) => {
-    console.log(order);
-    // setCopyOrderProducts(order.products);
     setCopyOrderProducts(order);
-    // setCopyOrder(order);
   };
 
   const calculateTotalCost = () => {
     let itemsPrice = 0;
     for (let i = 0; i < copyOrderProducts.length; i++) {
-      console.log((itemsPrice += copyOrderProducts[i].product.price));
+      itemsPrice +=
+        copyOrderProducts[i].product.price *
+        copyOrderProducts[i].productQuantity;
     }
 
-    setTotalCartCost(itemsPrice);
+    setTotalOrderCost(itemsPrice);
   };
 
   useEffect(() => {
     calculateTotalCost();
-  }, [totalCartCost, copyOrderProducts]);
+  }, [totalOrderCost, copyOrderProducts]);
 
   const onShowCart = () => {
     setCartIsShown(true);
@@ -50,85 +48,73 @@ export const OrderContextProvider = (props) => {
     setCartIsShown(false);
   };
 
-  const addCartItem = (product) => {
-    setCopyOrderProducts((prevCartItems) => {
-      if (
-        prevCartItems.find((cartItem) => cartItem.product._id === product._id)
-      ) {
-        alert('The product is already in the cart');
-        return prevCartItems;
-      }
-      return [...prevCartItems, { product: product, amount: 1 }];
-    });
-  };
+  // const addCartItem = (product) => {
+  //   setCopyOrderProducts((prevCartItems) => {
+  //     if (
+  //       prevCartItems.find((cartItem) => cartItem.product._id === product._id)
+  //     ) {
+  //       alert('The product is already in the cart');
+  //       return prevCartItems;
+  //     }
+  //     return [...prevCartItems, { product: product, amount: 1 }];
+  //   });
+  // };
 
   const addOrderItemAmount = (item) => {
-    console.log(copyOrderProducts);
-    console.log(copyOrder.products);
-    const existingOrderItemIndex = copyOrderProducts.findIndex((orderItem) => {
-      return item.product._id === orderItem.product._id;
+    const existingOrderItemIndex = copyOrderProducts.findIndex((cartItem) => {
+      return item.product._id === cartItem.product._id;
     });
-
-    console.log(existingOrderItemIndex);
 
     let updatedItems;
 
     const existingOrderItem = copyOrderProducts[existingOrderItemIndex];
-    console.log(existingOrderItem);
     if (existingOrderItem.productQuantity === 99) {
       return;
     } else {
       if (existingOrderItem) {
         const updatedItem = {
           ...existingOrderItem,
-          productQuantity: (existingOrderItem.productQuantity += 1),
+          productQuantity: existingOrderItem.productQuantity + 1,
         };
 
-        copyOrderProducts[existingOrderItemIndex] = updatedItem;
-        setCopyOrderProducts(copyOrderProducts);
-
-        console.log((copyOrder.products = copyOrderProducts));
-        setCopyOrder((copyOrder) => (copyOrder.products = copyOrderProducts));
-
-        // return;
-        // updatedItems = [...copyOrder];
-        // updatedItems[existingOrderItemIndex] = updatedItem;
+        updatedItems = [...copyOrderProducts];
+        updatedItems[existingOrderItemIndex] = updatedItem;
       }
-      // setCopyOrder(updatedItems);
-      console.log(copyOrder);
+      setCopyOrderProducts(updatedItems);
+      // calculateTotalCost();
     }
   };
 
-  const removeCartItemAmount = (item) => {
-    const existingCartItemIndex = copyOrderProducts.findIndex((cartItem) => {
+  const removeOrderItemAmount = (item) => {
+    const existingOrderItemIndex = copyOrderProducts.findIndex((cartItem) => {
       return item.product._id === cartItem.product._id;
     });
 
-    const existingItem = copyOrderProducts[existingCartItemIndex];
-    const updatedTotalAmount = totalCartCost - existingItem.product.price;
-    setTotalCartCost(updatedTotalAmount);
+    const existingItem = copyOrderProducts[existingOrderItemIndex];
+    // const updatedTotalAmount = totalOrderCost - existingItem.product.price;
+    // setTotalOrderCost(updatedTotalAmount);
 
     let updatedItems;
 
-    if (existingItem.amount === 1) {
-      updatedItems = copyOrderProducts.filter((cartItem) => {
-        return item.product._id !== cartItem.product._id;
+    if (existingItem.productQuantity === 1) {
+      updatedItems = copyOrderProducts.filter((orderItem) => {
+        return item.product._id !== orderItem.product._id;
       });
     } else {
       const updatedItem = {
         ...existingItem,
-        amount: (existingItem.amount -= 1),
+        productQuantity: (existingItem.productQuantity -= 1),
       };
       updatedItems = [...copyOrderProducts];
-      updatedItems[existingCartItemIndex] = updatedItem;
+      updatedItems[existingOrderItemIndex] = updatedItem;
     }
 
     setCopyOrderProducts(updatedItems);
   };
 
-  const makeAnOrderClick = (currentUser, cartItems) => {
-    createOrder(currentUser.uid, cartItems);
-  };
+  // const makeAnOrderClick = (currentUser, cartItems) => {
+  //   createOrder(currentUser.uid, cartItems);
+  // };
 
   const contextValue = {
     cartIsShown: cartIsShown,
@@ -136,11 +122,10 @@ export const OrderContextProvider = (props) => {
     hideCart: onHideCart,
     copyOfOrder: copyOrder,
     copyOrderProducts: copyOrderProducts,
-    totalAmount: totalCartCost,
+    totalAmount: totalOrderCost,
     makeOrderCopy: makeOrderCopy,
     addOrderItemAmount: addOrderItemAmount,
-    removeCartItemAmount: removeCartItemAmount,
-    makeAnOrderClick: makeAnOrderClick,
+    removeOrderItemAmount: removeOrderItemAmount,
   };
 
   return (

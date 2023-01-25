@@ -3,7 +3,7 @@ import ProductItemForm from '../ProductItemForm/ProductItemForm';
 import classes from './ProductItem.module.css';
 
 const ProductItem = ({ product, amount, editable, onAdd, onRemove }) => {
-  // console.log(product.productQuantity);
+  console.log(amount);
   const price = `$${product.price.toFixed(2)}`;
 
   return (
