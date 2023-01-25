@@ -4,6 +4,7 @@ const { v4: uuidv4 } = require('uuid');
 const mongoose = require('mongoose');
 
 const createOrder = async (req, res) => {
+  console.log(res.locals);
   try {
     const { orderData, userId, totalPayment } = req.body;
 
@@ -29,6 +30,8 @@ const createOrder = async (req, res) => {
 };
 
 const getAllUserOrders = async (req, res) => {
+  console.log(res.locals);
+
   try {
     const { userId } = req.params;
 

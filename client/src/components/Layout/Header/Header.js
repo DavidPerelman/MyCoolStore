@@ -15,6 +15,8 @@ const Header = () => {
   const cartCtx = useContext(CartContext);
   const isLoggedIn = authCtx.currentUser;
 
+  console.log(isLoggedIn);
+
   const showCartHandler = () => {
     cartCtx.showCart();
   };

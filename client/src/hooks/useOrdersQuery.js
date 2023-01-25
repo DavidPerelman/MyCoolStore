@@ -1,9 +1,9 @@
 import { useMutation, useQuery, useQueryClient } from 'react-query';
 import { fetchUserOrders, fetchSingleOrderData } from '../api/ordersApi';
 
-export const useGetAllUserOrders = (userId) => {
-  const orders = useQuery(['orders', userId], () => {
-    const result = fetchUserOrders(userId);
+export const useGetAllUserOrders = () => {
+  const orders = useQuery(['orders'], () => {
+    const result = fetchUserOrders();
     return result;
   });
   return orders;

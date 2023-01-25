@@ -9,6 +9,7 @@ import {
 import { auth, db } from '../firebase';
 // import { addDoc, collection } from 'firebase/firestore';
 import axios from 'axios';
+import { checkUserAuthorized, createToken, createUser } from '../api/usersApi';
 
 const AuthContext = createContext({
   userModalIsShown: false,
@@ -20,6 +21,7 @@ const AuthContext = createContext({
   signup: (email, password) => {},
   login: (email, password) => {},
   logout: () => {},
+  checkUserIsAuthorized: () => {},
   clearError: () => {},
 });
 
@@ -48,6 +50,24 @@ export const AuthContextProvider = (props) => {
       auth,
       async (authenticatedUser) => {
         if (authenticatedUser) {
+          console.log(authenticatedUser);
+          setCurrentUser(authenticatedUser);
+        } else {
+          setCurrentUser(null);
+        }
+      }
+    );
+  };
+
+  const checkUserIsAuthorized = async () => {
+    console.log(currentUser);
+    return;
+    checkUserAuthorized();
+    const unSubscribeAuth = checkUserAuthorized()(
+      auth,
+      async (authenticatedUser) => {
+        if (authenticatedUser) {
+          console.log(authenticatedUser);
           setCurrentUser(authenticatedUser);
         } else {
           setCurrentUser(null);
@@ -57,34 +77,32 @@ export const AuthContextProvider = (props) => {
   };
 
   const signup = async (username, email, password) => {
-    await createUserWithEmailAndPassword(auth, email, password)
-      .then(async (user) => {
-        await updateProfile(auth.currentUser, { displayName: username });
-        // await addDoc(usersCollectionRef, {
-        //   uid: user.user.uid,
-        //   email: email,
-        //   username: username,
-        //   role: 'customer',
-        // });
+    const mongoUser = await createUser(username, email, password);
+    console.log(mongoUser);
+    if (mongoUser) {
+      await createUserWithEmailAndPassword(
+        auth,
+        mongoUser.user.email,
+        mongoUser.user.password
+      )
+        .then(async (user) => {
+          await updateProfile(auth.currentUser, { displayName: username });
 
-        await axios.post('/api/auth/createUser', {
-          uid: user.user.uid,
-          email: email,
-          userName: username,
+          setCurrentUser({
+            displayName: user.user.displayName,
+            email: user.user.email,
+            uid: user.user.uid,
+          });
+        })
+        .catch((err) => {
+          setError('Signup error!');
+          clearError();
         });
 
-        setCurrentUser({
-          displayName: user.user.displayName,
-          email: user.user.email,
-          uid: user.user.uid,
-        });
+      localStorage.setItem('token', mongoUser.token);
 
-        setCurrentUser(user);
-      })
-      .catch((err) => {
-        setError('Signup error!');
-        clearError();
-      });
+      setCurrentUser(mongoUser);
+    }
   };
 
   const login = async (email, password) => {
@@ -96,6 +114,9 @@ export const AuthContextProvider = (props) => {
           uid: user.user.uid,
         });
 
+        const token = await createToken(user.uid, password);
+        console.log(token);
+        localStorage.setItem('token', token.token);
         setCurrentUser(user);
         onHideUserModal();
       })
@@ -107,6 +128,7 @@ export const AuthContextProvider = (props) => {
   };
 
   const logout = async () => {
+    localStorage.removeItem('token');
     return getAuth().signOut();
   };
 
@@ -125,6 +147,7 @@ export const AuthContextProvider = (props) => {
     login: login,
     logout: logout,
     clearError: clearError,
+    checkUserIsAuthorized: checkUserIsAuthorized,
   };
 
   return (

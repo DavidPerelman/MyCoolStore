@@ -8,6 +8,8 @@ const corsOptions = require('./config/corsOptions');
 const data = require('./data.js');
 const connectDB = require('./config/connectDB');
 
+// const { authMiddlware } = require('./middleware/auth-middleware');
+
 dotenv.config();
 
 connectDB();

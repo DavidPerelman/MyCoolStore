@@ -1,17 +1,19 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState, useContext } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import Table from '../../components/UI/Table/Table';
 import { useGetAllUserOrders } from '../../hooks/useOrdersQuery';
+import AuthContext from '../../store/auth-context';
 import classes from './MyOrders.module.css';
 
 const MyOrders = () => {
   const filterInputRef = useRef();
   const [filterText, setFilterText] = useState('');
-
+  const authtx = useContext(AuthContext);
+  console.log(authtx.currentUser);
   const navigate = useNavigate();
   const { userId } = useParams();
 
-  const { isLoading, error, data: orders } = useGetAllUserOrders(userId);
+  const { isLoading, error, data: orders } = useGetAllUserOrders();
 
   const columns = [
     {
@@ -84,6 +86,8 @@ const MyOrders = () => {
       filterInputRef.current.value = '';
     }
   };
+
+  console.log(orders);
 
   return (
     <div className={classes.MyOrders}>
