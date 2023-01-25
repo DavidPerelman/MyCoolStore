@@ -2,7 +2,7 @@ import axios from 'axios';
 
 export const createUser = async (username, email, password) => {
   const response = await axios.post(
-    `${process.env.REACT_APP_API}/api/auth/createUser`,
+    `${process.env.REACT_APP_API}/api/auth/firebase/create`,
     {
       email: email,
       userName: username,

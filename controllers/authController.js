@@ -96,18 +96,20 @@ const checkLoggedIn = async (req, res) => {
 };
 
 const createFirebaseUser = async (req, res) => {
+  console.log('createFirebaseUser');
   const { userName, email, password } = req.body;
-
   try {
     const newFirebaseUser = await auth.createUser({ email, password });
 
+    console.log(newFirebaseUser);
     if (newFirebaseUser) {
-      console.log('newFirebaseUser');
       const newUser = await new User({
         userName: userName,
         email: email,
         firebaseId: newFirebaseUser.uid,
       }).save();
+
+      await auth.updateUser(newUser.firebaseId, { displayName: userName });
     }
     return res
       .status(200)

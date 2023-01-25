@@ -6,10 +6,10 @@ import {
   updateProfile,
   onAuthStateChanged,
 } from 'firebase/auth';
-import { auth, db } from '../firebase';
+import { auth } from '../firebase';
 // import { addDoc, collection } from 'firebase/firestore';
 import axios from 'axios';
-import { checkUserAuthorized, createToken, createUser } from '../api/usersApi';
+import { createToken, createUser } from '../api/usersApi';
 
 const AuthContext = createContext({
   userModalIsShown: false,
@@ -32,8 +32,6 @@ export const AuthContextProvider = (props) => {
   const [error, setError] = useState(null);
   const [authorized, setAuthorized] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [loadingUser, setLoadingUser] = useState(false);
-  // const usersCollectionRef = collection(db, 'users');
 
   const onShowUserModal = () => {
     setUserModalIsShown(true);
@@ -48,20 +46,6 @@ export const AuthContextProvider = (props) => {
       setError(null);
     }, 3000);
   };
-
-  // const checkLoggedIn = async () => {
-  //   const unSubscribeAuth = onAuthStateChanged(
-  //     auth,
-  //     async (authenticatedUser) => {
-  //       if (authenticatedUser) {
-  //         console.log(authenticatedUser);
-  //         setCurrentUser(authenticatedUser);
-  //       } else {
-  //         setCurrentUser(null);
-  //       }
-  //     }
-  //   );
-  // };
 
   const signup = async (username, email, password) => {
     const mongoUser = await createUser(username, email, password);
@@ -92,27 +76,27 @@ export const AuthContextProvider = (props) => {
     }
   };
 
-  const login = async (email, password) => {
-    await signInWithEmailAndPassword(auth, email, password)
-      .then(async (user) => {
-        setCurrentUser({
-          displayName: user.user.displayName,
-          email: user.user.email,
-          uid: user.user.uid,
-        });
+  // const login = async (email, password) => {
+  //   await signInWithEmailAndPassword(auth, email, password)
+  //     .then(async (user) => {
+  //       setCurrentUser({
+  //         displayName: user.user.displayName,
+  //         email: user.user.email,
+  //         uid: user.user.uid,
+  //       });
 
-        const token = await createToken(user.uid, password);
-        console.log(token);
-        localStorage.setItem('token', token.token);
-        setCurrentUser(user);
-        onHideUserModal();
-      })
-      .catch((err) => {
-        setError('Login error!');
-        onShowUserModal();
-        clearError();
-      });
-  };
+  //       const token = await createToken(user.uid, password);
+  //       console.log(token);
+  //       localStorage.setItem('token', token.token);
+  //       setCurrentUser(user);
+  //       onHideUserModal();
+  //     })
+  //     .catch((err) => {
+  //       setError('Login error!');
+  //       onShowUserModal();
+  //       clearError();
+  //     });
+  // };
 
   const logout = async () => {
     localStorage.removeItem('token');
@@ -133,28 +117,6 @@ export const AuthContextProvider = (props) => {
       clearError();
     }
   };
-
-  // const getUser = async () => {
-  //   try {
-  //     setLoadingUser(true);
-  //     // const token = await auth.currentUser.getIdToken();
-  //     const bearer_token = `Bearer ${localStorage.getItem('token')}`;
-
-  //     // const token = auth.currentUser
-  //     //   .getIdToken()
-  //     //   .then((data) => console.log(data));
-
-  //     const data = await checkUserAuthorized(bearer_token);
-  //     console.log(auth.currentUser);
-  //     if (data.data) {
-  //       setAuthorized(true);
-  //       setCurrentUser(data.data);
-  //       setLoadingUser(false);
-  //     }
-  //   } catch (err) {
-  //     console.error(err);
-  //   }
-  // };
 
   useEffect(() => {
     const authStateListener = () => {
@@ -178,7 +140,6 @@ export const AuthContextProvider = (props) => {
     userModalIsShown: userModalIsShown,
     showUserModal: onShowUserModal,
     hideUserModal: onHideUserModal,
-    // checkLoggedIn: checkLoggedIn,
     signup: signup,
     currentUser: currentUser,
     error: error,
@@ -186,7 +147,6 @@ export const AuthContextProvider = (props) => {
     login: firebaseLogin,
     logout: logout,
     clearError: clearError,
-    // checkUserIsAuthorized: getUser,
   };
 
   return (
