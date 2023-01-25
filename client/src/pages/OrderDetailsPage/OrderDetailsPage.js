@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from 'react';
+import React, { useState, useContext } from 'react';
 import { useParams } from 'react-router-dom';
 import OrderProducts from '../../components/Order/OrderProducts/OrderProducts';
 import OrderSummary from '../../components/Order/OrderSummary/OrderSummary';
@@ -33,7 +33,6 @@ const OrderDetailsPage = () => {
           products={editable ? orderCtx.copyOrderProducts : order.products}
           editable={editable}
         />
-        {/* <OrderProducts products={order && order.products} editable={editable} /> */}
         <OrderSummary
           editable={editable}
           totalPayment={order && order.totalPayment}
@@ -54,10 +53,7 @@ const OrderDetailsPage = () => {
 
   return (
     <div className={classes.OrderDetailsPage}>
-      <section>
-        {/* <div className={classes.container}> */}
-        {content}
-      </section>
+      <section>{content}</section>
     </div>
   );
 };

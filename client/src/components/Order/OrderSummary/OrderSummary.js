@@ -1,6 +1,5 @@
 import React, { useContext } from 'react';
 import OrderContext from '../../../store/order-context';
-import OrderProducts from '../OrderProducts/OrderProducts';
 import classes from './OrderSummary.module.css';
 
 const OrderSummary = ({

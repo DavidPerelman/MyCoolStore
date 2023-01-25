@@ -11,7 +11,7 @@ import {
 import { CartContextProvider } from './store/cart-context';
 import { OrderContextProvider } from './store/order-context';
 import CategoryProductsPage from './pages/CategoryProductsPage/CategoryProductsPage';
-import { useContext, useEffect } from 'react';
+import { useContext } from 'react';
 import AuthContext from './store/auth-context';
 import ProfileDashboard from './pages/ProfileDashboard/ProfileDashboard';
 import MyOrders from './pages/MyOrders/MyOrders';

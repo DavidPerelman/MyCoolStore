@@ -1,12 +1,7 @@
 import React, { createContext, useEffect, useState } from 'react';
-import { createOrder } from '../api/ordersApi';
-import useLocalStorage from '../hooks/use-local-storage';
 
 const orderCtx = createContext({
   editable: false,
-  showCart: () => {},
-  hideCart: () => {},
-  copyOfOrder: {},
   copyOrderProducts: [],
   totalAmount: 0,
   makeOrderCopy: (id) => {},
@@ -16,9 +11,6 @@ const orderCtx = createContext({
 
 export const OrderContextProvider = (props) => {
   const [totalOrderCost, setTotalOrderCost] = useState(0);
-  const [cartIsShown, setCartIsShown] = useState(false);
-  // const [cartItems, setCartItems] = useLocalStorage('cartItems', []);
-  const [copyOrder, setCopyOrder] = useState({});
   const [copyOrderProducts, setCopyOrderProducts] = useState([]);
 
   const makeOrderCopy = async (order) => {
@@ -39,26 +31,6 @@ export const OrderContextProvider = (props) => {
   useEffect(() => {
     calculateTotalCost();
   }, [totalOrderCost, copyOrderProducts]);
-
-  const onShowCart = () => {
-    setCartIsShown(true);
-  };
-
-  const onHideCart = () => {
-    setCartIsShown(false);
-  };
-
-  // const addCartItem = (product) => {
-  //   setCopyOrderProducts((prevCartItems) => {
-  //     if (
-  //       prevCartItems.find((cartItem) => cartItem.product._id === product._id)
-  //     ) {
-  //       alert('The product is already in the cart');
-  //       return prevCartItems;
-  //     }
-  //     return [...prevCartItems, { product: product, amount: 1 }];
-  //   });
-  // };
 
   const addOrderItemAmount = (item) => {
     const existingOrderItemIndex = copyOrderProducts.findIndex((cartItem) => {
@@ -81,7 +53,6 @@ export const OrderContextProvider = (props) => {
         updatedItems[existingOrderItemIndex] = updatedItem;
       }
       setCopyOrderProducts(updatedItems);
-      // calculateTotalCost();
     }
   };
 
@@ -91,8 +62,6 @@ export const OrderContextProvider = (props) => {
     });
 
     const existingItem = copyOrderProducts[existingOrderItemIndex];
-    // const updatedTotalAmount = totalOrderCost - existingItem.product.price;
-    // setTotalOrderCost(updatedTotalAmount);
 
     let updatedItems;
 
@@ -117,10 +86,6 @@ export const OrderContextProvider = (props) => {
   // };
 
   const contextValue = {
-    cartIsShown: cartIsShown,
-    showCart: onShowCart,
-    hideCart: onHideCart,
-    copyOfOrder: copyOrder,
     copyOrderProducts: copyOrderProducts,
     totalAmount: totalOrderCost,
     makeOrderCopy: makeOrderCopy,
