@@ -1,9 +1,12 @@
+import { useContext } from 'react';
 import { useMutation, useQuery, useQueryClient } from 'react-query';
 import { fetchUserOrders, fetchSingleOrderData } from '../api/ordersApi';
 
 export const useGetAllUserOrders = () => {
+  const token = `Bearer ${localStorage.getItem('token')}`;
+
   const orders = useQuery(['orders'], () => {
-    const result = fetchUserOrders();
+    const result = fetchUserOrders(token);
     return result;
   });
   return orders;

@@ -19,7 +19,7 @@ import OrderDetailsPage from './pages/OrderDetailsPage/OrderDetailsPage';
 
 function App() {
   const authCtx = useContext(AuthContext);
-  const isLoggedIn = authCtx.currentUser !== null;
+  const isLoggedIn = authCtx.authorized;
   console.log(authCtx.authorized);
 
   const router = createBrowserRouter(
@@ -32,9 +32,7 @@ function App() {
           element={<CategoryProductsPage />}
           exact
         />
-        {isLoggedIn && (
-          <Route path='/:userId/my-orders' element={<MyOrders />} />
-        )}
+        {isLoggedIn && <Route path='/my-orders' element={<MyOrders />} />}
         {isLoggedIn && (
           <Route path='/order/:orderId' element={<OrderDetailsPage />} />
         )}

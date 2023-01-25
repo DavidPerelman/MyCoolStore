@@ -1,20 +1,17 @@
-import React, { useRef, useState, useContext } from 'react';
+import React, { useRef, useState, useContext, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import Table from '../../components/UI/Table/Table';
 import { useGetAllUserOrders } from '../../hooks/useOrdersQuery';
-import AuthContext from '../../store/auth-context';
 import classes from './MyOrders.module.css';
 
 const MyOrders = () => {
   const filterInputRef = useRef();
   const [filterText, setFilterText] = useState('');
-  const authtx = useContext(AuthContext);
-  console.log(authtx.currentUser);
   const navigate = useNavigate();
-  const { userId } = useParams();
 
   const { isLoading, error, data: orders } = useGetAllUserOrders();
 
+  console.log(orders);
   const columns = [
     {
       name: 'No.',

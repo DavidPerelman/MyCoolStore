@@ -105,7 +105,8 @@ export const CartContextProvider = (props) => {
   };
 
   const makeAnOrderClick = (currentUser, cartItems) => {
-    createOrder(currentUser.uid, cartItems);
+    console.log(currentUser.currentUser.uid);
+    createOrder(currentUser.currentUser.uid, cartItems);
   };
 
   const contextValue = {

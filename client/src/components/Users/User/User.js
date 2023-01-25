@@ -6,7 +6,7 @@ import Modal from '../../UI/Modal/Modal';
 
 const User = ({ onCloseUserModal }) => {
   const authCtx = useContext(AuthContext);
-  const isLoggedIn = authCtx.currentUser;
+  const isLoggedIn = authCtx.authorized;
   console.log(isLoggedIn);
 
   return (

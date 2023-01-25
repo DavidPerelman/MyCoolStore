@@ -27,15 +27,18 @@ export const createToken = async (uid, password) => {
   return user;
 };
 
-export const checkUserAuthorized = async (token) => {
-  const bearer_token = `Bearer ${token}`;
-
-  const response = await axios.get(
-    `${process.env.REACT_APP_API}/api/auth-middleware`
-  );
-  const Authorized = response.data;
-  return Authorized;
-};
+// export const checkUserAuthorized = async (token) => {
+//   const response = await axios.get(
+//     `${process.env.REACT_APP_API}/api/auth-middleware`,
+//     {
+//       headers: {
+//         authorization: `Bearer ${token}`,
+//       },
+//     }
+//   );
+//   const authorized = response.data;
+//   return authorized;
+// };
 
 export const fetchCategory = async (categoryId) => {
   const response = await axios.get(

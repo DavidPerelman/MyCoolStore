@@ -6,18 +6,17 @@ import classes from './LoggedInLayout.module.css';
 
 const LoggedInLayout = ({ onCloseUserModal }) => {
   const authCtx = useContext(AuthContext);
-  const { uid, displayName } = authCtx.currentUser;
-
+  const displayName = 'name';
   const navigate = useNavigate();
 
   const onMyOrdersHandler = () => {
     authCtx.hideUserModal();
-    navigate(`/${uid}/my-orders`);
+    navigate(`/my-orders`);
   };
 
   const onEditProfileHandler = () => {
     authCtx.hideUserModal();
-    navigate(`/${uid}/profile-setting`);
+    navigate(`/profile-setting`);
   };
 
   const onLogoutHandler = () => {

@@ -41,7 +41,7 @@ const Cart = ({ onCloseCart }) => {
 
   return (
     <Modal onClose={onCloseCart}>
-      {!authCtx.currentUser && <p>You must be logged in to place an order!</p>}
+      {!authCtx.authorized && <p>You must be logged in to place an order!</p>}
       {cartItems}
       <div className={classes.total}>
         <span>Total Amount</span>
@@ -51,12 +51,10 @@ const Cart = ({ onCloseCart }) => {
         <button className={classes['button--alt']} onClick={onCloseCart}>
           Close
         </button>
-        {hasItems && authCtx.currentUser && (
+        {hasItems && authCtx.authorized && (
           <button
             className={classes.button}
-            onClick={() =>
-              cartCtx.makeAnOrderClick(authCtx.currentUser, cartCtx.items)
-            }
+            onClick={() => cartCtx.makeAnOrderClick(authCtx, cartCtx.items)}
           >
             Order
           </button>

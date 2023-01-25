@@ -42,7 +42,7 @@ const CategoryContainer = ({ category }) => {
   };
 
   return (
-    <div className={classes.CategoryContainer}>
+    <div className={classes.CategoryContainer} key={category.name}>
       <div className={classes['categories-button']}>
         <Button onClick={onCategoryClick}>
           Our {category.name.charAt(0).toUpperCase() + category.name.slice(1)}

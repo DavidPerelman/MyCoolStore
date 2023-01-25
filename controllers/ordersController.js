@@ -4,10 +4,10 @@ const { v4: uuidv4 } = require('uuid');
 const mongoose = require('mongoose');
 
 const createOrder = async (req, res) => {
-  console.log(res.locals);
   try {
     const { orderData, userId, totalPayment } = req.body;
 
+    console.log(req.user);
     for (let i = 0; i < orderData.length; i++) {
       orderData[i].product = mongoose.Types.ObjectId(
         orderData[i].product.trim()
@@ -30,12 +30,12 @@ const createOrder = async (req, res) => {
 };
 
 const getAllUserOrders = async (req, res) => {
-  console.log(res.locals);
+  console.log(req.user);
 
   try {
-    const { userId } = req.params;
+    const { firebaseId } = req.user;
 
-    const orders = await Order.find({ user: userId })
+    const orders = await Order.find({ user: firebaseId })
       .populate('products.product')
       .exec();
 

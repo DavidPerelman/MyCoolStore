@@ -22,7 +22,7 @@ const AuthContext = createContext({
   signup: (email, password) => {},
   login: (email, password) => {},
   logout: () => {},
-  checkUserIsAuthorized: () => {},
+  // checkUserIsAuthorized: () => {},
   clearError: () => {},
 });
 
@@ -32,6 +32,7 @@ export const AuthContextProvider = (props) => {
   const [error, setError] = useState(null);
   const [authorized, setAuthorized] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [loadingUser, setLoadingUser] = useState(false);
   // const usersCollectionRef = collection(db, 'users');
 
   const onShowUserModal = () => {
@@ -48,36 +49,19 @@ export const AuthContextProvider = (props) => {
     }, 3000);
   };
 
-  const checkLoggedIn = async () => {
-    const unSubscribeAuth = onAuthStateChanged(
-      auth,
-      async (authenticatedUser) => {
-        if (authenticatedUser) {
-          console.log(authenticatedUser);
-          setCurrentUser(authenticatedUser);
-        } else {
-          setCurrentUser(null);
-        }
-      }
-    );
-  };
-
-  const checkUserIsAuthorized = async () => {
-    console.log(currentUser);
-    return;
-    checkUserAuthorized();
-    const unSubscribeAuth = checkUserAuthorized()(
-      auth,
-      async (authenticatedUser) => {
-        if (authenticatedUser) {
-          console.log(authenticatedUser);
-          setCurrentUser(authenticatedUser);
-        } else {
-          setCurrentUser(null);
-        }
-      }
-    );
-  };
+  // const checkLoggedIn = async () => {
+  //   const unSubscribeAuth = onAuthStateChanged(
+  //     auth,
+  //     async (authenticatedUser) => {
+  //       if (authenticatedUser) {
+  //         console.log(authenticatedUser);
+  //         setCurrentUser(authenticatedUser);
+  //       } else {
+  //         setCurrentUser(null);
+  //       }
+  //     }
+  //   );
+  // };
 
   const signup = async (username, email, password) => {
     const mongoUser = await createUser(username, email, password);
@@ -140,6 +124,8 @@ export const AuthContextProvider = (props) => {
       const user = await signInWithEmailAndPassword(auth, email, password);
       if (user) {
         setAuthorized(true);
+        console.log(user.user.accessToken);
+        localStorage.setItem('token', user.user.accessToken);
       }
     } catch (err) {
       console.log(err);
@@ -147,6 +133,28 @@ export const AuthContextProvider = (props) => {
       clearError();
     }
   };
+
+  // const getUser = async () => {
+  //   try {
+  //     setLoadingUser(true);
+  //     // const token = await auth.currentUser.getIdToken();
+  //     const bearer_token = `Bearer ${localStorage.getItem('token')}`;
+
+  //     // const token = auth.currentUser
+  //     //   .getIdToken()
+  //     //   .then((data) => console.log(data));
+
+  //     const data = await checkUserAuthorized(bearer_token);
+  //     console.log(auth.currentUser);
+  //     if (data.data) {
+  //       setAuthorized(true);
+  //       setCurrentUser(data.data);
+  //       setLoadingUser(false);
+  //     }
+  //   } catch (err) {
+  //     console.error(err);
+  //   }
+  // };
 
   useEffect(() => {
     const authStateListener = () => {
@@ -157,19 +165,20 @@ export const AuthContextProvider = (props) => {
         }
 
         setLoading(false);
+        setCurrentUser(user);
         return setAuthorized(true);
       });
     };
 
     authStateListener();
-    checkLoggedIn();
+    // checkLoggedIn();
   }, [authorized]);
 
   const contextValue = {
     userModalIsShown: userModalIsShown,
     showUserModal: onShowUserModal,
     hideUserModal: onHideUserModal,
-    checkLoggedIn: checkLoggedIn,
+    // checkLoggedIn: checkLoggedIn,
     signup: signup,
     currentUser: currentUser,
     error: error,
@@ -177,7 +186,7 @@ export const AuthContextProvider = (props) => {
     login: firebaseLogin,
     logout: logout,
     clearError: clearError,
-    checkUserIsAuthorized: checkUserIsAuthorized,
+    // checkUserIsAuthorized: getUser,
   };
 
   return (

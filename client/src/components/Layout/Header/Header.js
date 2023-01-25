@@ -13,7 +13,7 @@ import User from '../../Users/User/User';
 const Header = () => {
   const authCtx = useContext(AuthContext);
   const cartCtx = useContext(CartContext);
-  const isLoggedIn = authCtx.currentUser;
+  const isLoggedIn = authCtx.authorized;
 
   console.log(isLoggedIn);
 
