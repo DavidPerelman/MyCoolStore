@@ -8,6 +8,14 @@ const corsOptions = require('./config/corsOptions');
 const data = require('./data.js');
 const connectDB = require('./config/connectDB');
 
+// var admin = require('firebase-admin');
+
+// var serviceAccount = require('./config/serviceAccountKey.json');
+
+// admin.initializeApp({
+//   credential: admin.credential.cert(serviceAccount),
+// });
+
 // const { authMiddlware } = require('./middleware/auth-middleware');
 
 dotenv.config();

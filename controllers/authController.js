@@ -1,6 +1,7 @@
 const User = require('../models/userModel');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
+const { auth } = require('../services/firebase');
 
 const createNewUser = async (req, res) => {
   try {
@@ -94,4 +95,36 @@ const checkLoggedIn = async (req, res) => {
     });
 };
 
-module.exports = { createNewUser, loginUser, checkLoggedIn };
+const createFirebaseUser = async (req, res) => {
+  const { userName, email, password } = req.body;
+
+  try {
+    const newFirebaseUser = await auth.createUser({ email, password });
+
+    if (newFirebaseUser) {
+      console.log('newFirebaseUser');
+      const newUser = await new User({
+        userName: userName,
+        email: email,
+        firebaseId: newFirebaseUser.uid,
+      }).save();
+    }
+    return res
+      .status(200)
+      .json({ success: 'Account created successfully. Please sign in.' });
+  } catch (err) {
+    if (err.code === 'auth/email-already-exists') {
+      return res
+        .status(400)
+        .json({ error: 'User account already exists at email address.' });
+    }
+    return res.status(500).json({ error: 'Server error. Please try again' });
+  }
+};
+
+module.exports = {
+  createNewUser,
+  loginUser,
+  checkLoggedIn,
+  createFirebaseUser,
+};
