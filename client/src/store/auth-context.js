@@ -17,6 +17,7 @@ const AuthContext = createContext({
   hideUserModal: () => {},
   token: '',
   isLoggedIn: false,
+  authorized: false,
   currentUser: null,
   signup: (email, password) => {},
   login: (email, password) => {},
@@ -29,6 +30,8 @@ export const AuthContextProvider = (props) => {
   const [currentUser, setCurrentUser] = useState();
   const [userModalIsShown, setUserModalIsShown] = useState(false);
   const [error, setError] = useState(null);
+  const [authorized, setAuthorized] = useState(false);
+  const [loading, setLoading] = useState(false);
   // const usersCollectionRef = collection(db, 'users');
 
   const onShowUserModal = () => {
@@ -132,9 +135,35 @@ export const AuthContextProvider = (props) => {
     return getAuth().signOut();
   };
 
+  const firebaseLogin = async (email, password) => {
+    try {
+      const user = await signInWithEmailAndPassword(auth, email, password);
+      if (user) {
+        setAuthorized(true);
+      }
+    } catch (err) {
+      console.log(err);
+      setError('Invalid email address or password.');
+      clearError();
+    }
+  };
+
   useEffect(() => {
+    const authStateListener = () => {
+      auth.onAuthStateChanged(async (user) => {
+        if (!user) {
+          setLoading(false);
+          return setAuthorized(false);
+        }
+
+        setLoading(false);
+        return setAuthorized(true);
+      });
+    };
+
+    authStateListener();
     checkLoggedIn();
-  }, []);
+  }, [authorized]);
 
   const contextValue = {
     userModalIsShown: userModalIsShown,
@@ -144,7 +173,8 @@ export const AuthContextProvider = (props) => {
     signup: signup,
     currentUser: currentUser,
     error: error,
-    login: login,
+    authorized: authorized,
+    login: firebaseLogin,
     logout: logout,
     clearError: clearError,
     checkUserIsAuthorized: checkUserIsAuthorized,

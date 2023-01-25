@@ -20,6 +20,7 @@ import OrderDetailsPage from './pages/OrderDetailsPage/OrderDetailsPage';
 function App() {
   const authCtx = useContext(AuthContext);
   const isLoggedIn = authCtx.currentUser !== null;
+  console.log(authCtx.authorized);
 
   const router = createBrowserRouter(
     createRoutesFromElements(
