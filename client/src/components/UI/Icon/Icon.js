@@ -7,7 +7,7 @@ const Icon = ({ type, count, amount, onClick, isLoggedIn, size }) => {
         {count && <span className={classes.count}>{amount}</span>}
         <i
           className={`fas ${type} fa-${size || 'lg'} ${classes.headerIcon} ${
-            type === 'fa-user' && isLoggedIn !== null ? classes.isLogin : ''
+            type === 'fa-user' && isLoggedIn ? classes.isLogin : ''
           }`}
         ></i>
       </div>
