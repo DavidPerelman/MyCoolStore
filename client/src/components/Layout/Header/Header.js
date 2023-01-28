@@ -52,7 +52,10 @@ const Header = () => {
             </LinkContainer>
           </Container>
           {/* <Dropdown categories={categories} /> */}
-          <SearchBar data={categories} placeholder='Search Category...' />
+          {categories && (
+            <SearchBar data={categories.categories} placeholder='Search' />
+          )}
+
           {/* <DropdownList /> */}
           <div className={classes.icons}>
             <Icon

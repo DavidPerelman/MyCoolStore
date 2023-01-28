@@ -1,4 +1,53 @@
-.search {
+.searchInputs {
+  display: flex;
 }
-.searchInput {
+
+.search input {
+  border: 0;
+  border-radius: 2px;
+  font-size: 18px;
+  padding: 15px;
+  height: 30px;
+  width: 300px;
+  background: url('https://cdn2.iconfinder.com/data/icons/windows-8-metro-style/512/search.png')
+    no-repeat 8px 6px;
+  background-color: #ffff;
+  background-size: 24px 24px;
+  background-position: 5px left 2px right;
+  padding-left: 33px;
+  padding-bottom: 20px;
+}
+
+input:focus {
+  outline: none;
+}
+
+.dataResults {
+  margin-top: 5px;
+  height: 200px;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  overflow: hidden;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  background-color: white;
+  width: 34%;
+}
+
+.dataItem {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  padding: 5px;
+  cursor: pointer;
+  color: black;
+}
+
+.dataItem:hover {
+  background-color: lightgrey;
+}
+
+.dataResults a {
+  color: black;
 }
