@@ -9,6 +9,7 @@ import AuthContext from '../../../store/auth-context';
 import CartContext from '../../../store/cart-context';
 import Cart from '../../Cart/Cart/Cart';
 import User from '../../Users/User/User';
+import DropdownList from '../../UI/DropdownList/DropdownList';
 
 const Header = () => {
   const authCtx = useContext(AuthContext);
@@ -48,6 +49,7 @@ const Header = () => {
               </Navbar.Brand>
             </LinkContainer>
           </Container>
+          <DropdownList />
           <div className={classes.icons}>
             <Icon
               type='fa-shopping-cart'

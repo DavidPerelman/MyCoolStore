@@ -1,0 +1,16 @@
+.Dropdown {
+  width: 30%;
+  font-weight: 700;
+  color: black !important;
+}
+
+/* .Dropdown a {
+  font-size: 13px;
+  font-weight: 400;
+} */
+
+.dropdown-menu ul a {
+  color: black !important;
+  font-size: 15px;
+  font-weight: 400;
+}
