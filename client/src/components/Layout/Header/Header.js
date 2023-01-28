@@ -12,14 +12,13 @@ import User from '../../Users/User/User';
 import DropdownList from '../../UI/DropdownList/DropdownList';
 import Dropdown from '../../UI/DropdownList/Dropdown';
 import { useCategoriesQuery } from '../../../hooks/useCategoriesQuery';
+import SearchBar from '../../UI/SearchBar/SearchBar';
 
 const Header = () => {
   const authCtx = useContext(AuthContext);
   const cartCtx = useContext(CartContext);
   const isLoggedIn = authCtx.authorized;
   const { isLoading, isError, data: categories } = useCategoriesQuery();
-
-  console.log(isLoggedIn);
 
   const showCartHandler = () => {
     cartCtx.showCart();
@@ -52,7 +51,8 @@ const Header = () => {
               </Navbar.Brand>
             </LinkContainer>
           </Container>
-          <Dropdown categories={categories} />
+          {/* <Dropdown categories={categories} /> */}
+          <SearchBar data={categories} placeholder='Search Category...' />
           {/* <DropdownList /> */}
           <div className={classes.icons}>
             <Icon
