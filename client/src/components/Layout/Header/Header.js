@@ -10,11 +10,14 @@ import CartContext from '../../../store/cart-context';
 import Cart from '../../Cart/Cart/Cart';
 import User from '../../Users/User/User';
 import DropdownList from '../../UI/DropdownList/DropdownList';
+import Dropdown from '../../UI/DropdownList/Dropdown';
+import { useCategoriesQuery } from '../../../hooks/useCategoriesQuery';
 
 const Header = () => {
   const authCtx = useContext(AuthContext);
   const cartCtx = useContext(CartContext);
   const isLoggedIn = authCtx.authorized;
+  const { isLoading, isError, data: categories } = useCategoriesQuery();
 
   console.log(isLoggedIn);
 
@@ -49,7 +52,8 @@ const Header = () => {
               </Navbar.Brand>
             </LinkContainer>
           </Container>
-          <DropdownList />
+          <Dropdown categories={categories} />
+          {/* <DropdownList /> */}
           <div className={classes.icons}>
             <Icon
               type='fa-shopping-cart'
