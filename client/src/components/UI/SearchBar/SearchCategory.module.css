@@ -1,25 +1,27 @@
 .search {
   margin-right: 1rem;
+  width: 100%;
 }
 
 .searchInputs {
   display: flex;
+  justify-content: center;
 }
 
 .search input {
-  border: 0;
-  border-radius: 2px;
-  font-size: 18px;
-  padding: 15px;
-  height: 30px;
-  width: 300px;
+  border: 0 !important;
+  border-radius: 2px !important;
+  font-size: 18px !important;
+  padding: 15px !important;
+  height: 30px !important;
+  width: 300px !important;
   background: url('https://cdn2.iconfinder.com/data/icons/windows-8-metro-style/512/search.png')
-    no-repeat 8px 6px;
-  background-color: #ffff;
-  background-size: 24px 24px;
-  background-position: 5px left 2px right;
-  padding-left: 33px;
-  padding-bottom: 20px;
+    no-repeat 8px 6px !important;
+  background-color: #ffff !important;
+  background-size: 24px 24px !important;
+  background-position: 5px left 2px right !important;
+  padding-left: 33px !important;
+  padding-bottom: 20px !important;
 }
 
 input:focus {
@@ -37,6 +39,7 @@ input:focus {
   position: absolute;
   background-color: white;
   width: 34%;
+  z-index: 1;
 }
 
 .dataItem {
@@ -54,4 +57,19 @@ input:focus {
 
 .dataResults a {
   color: black;
+}
+
+@media only screen and (max-width: 800px) {
+  .search {
+    width: 100%;
+  }
+
+  .searchInputs {
+    justify-content: center;
+  }
+
+  .dataResults {
+    width: 80%;
+    margin-left: 1.5rem;
+  }
 }

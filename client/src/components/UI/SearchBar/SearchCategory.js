@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import classes from './SearchBar.module.css';
+import classes from './SearchCategory.module.css';
 
-const SearchBar = ({ placeholder, data }) => {
+const SearchCategory = ({ placeholder, data }) => {
   const [show, setShow] = useState(false);
   const [filteredData, setfilteredData] = useState(data);
 
   useEffect(() => {
     window.addEventListener('click', function (e) {
-      if (e.target.id === 'SearchBarInput') {
+      if (e.target.id === 'SearchCategoryInput') {
         // Clicked in input
         setShow(true);
       } else {
@@ -32,7 +32,7 @@ const SearchBar = ({ placeholder, data }) => {
         <input
           type='text'
           placeholder={placeholder}
-          id='SearchBarInput'
+          id='SearchCategoryInput'
           onChange={handleFilter}
         />
       </div>
@@ -51,4 +51,4 @@ const SearchBar = ({ placeholder, data }) => {
   );
 };
 
-export default SearchBar;
+export default SearchCategory;

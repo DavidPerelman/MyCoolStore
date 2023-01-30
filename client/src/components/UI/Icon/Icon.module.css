@@ -44,7 +44,8 @@
   font-family: 'Roboto', sans-serif;
   font-weight: bold;
   left: 0px;
-  margin-left: 30px;
+  margin-left: 40px;
+  text-align-last: center;
 }
 
 .headerIcon {
@@ -53,4 +54,8 @@
 
 .isLogin {
   color: limegreen;
+}
+
+.cart i {
+  color: white;
 }

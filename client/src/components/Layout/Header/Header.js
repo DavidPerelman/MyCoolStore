@@ -10,7 +10,7 @@ import CartContext from '../../../store/cart-context';
 import Cart from '../../Cart/Cart/Cart';
 import User from '../../Users/User/User';
 import { useCategoriesQuery } from '../../../hooks/useCategoriesQuery';
-import SearchBar from '../../UI/SearchBar/SearchBar';
+import SearchCategory from '../../UI/SearchBar/SearchCategory';
 
 const Header = () => {
   const authCtx = useContext(AuthContext);
@@ -50,10 +50,10 @@ const Header = () => {
             </LinkContainer>
           </Container>
           {categories && (
-            <SearchBar data={categories.categories} placeholder='Search' />
+            <SearchCategory data={categories.categories} placeholder='Search' />
           )}
           {categories && (
-            <SearchBar data={categories.categories} placeholder='Search' />
+            <SearchCategory data={categories.categories} placeholder='Search' />
           )}
 
           <div className={classes.icons}>
