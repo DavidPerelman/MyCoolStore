@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import classes from './MyNavbar.module.css';
 import Icon from '../../UI/Icon/Icon';
 import { useState } from 'react';
+import Hamburger from '../../UI/Hamburger/Hamburger';
 
 const MyNavbar = () => {
   const [showLinks, setShowLinks] = useState(true);
@@ -18,8 +19,11 @@ const MyNavbar = () => {
           <Link>About Us</Link>
           <Link>Contact</Link>
         </div>
-        <i className='fas fa-bars'></i>
-        <button onClick={() => setShowLinks(!showLinks)}>Open</button>
+        <div className={classes.Hamburger}>
+          <Hamburger showLinks={showLinks} setShowLinks={setShowLinks} />
+        </div>
+        {/* <i className='fas fa-bars'></i> */}
+        {/* <button onClick={() => setShowLinks(!showLinks)}>Open</button> */}
       </div>
       <div className={classes['right-side']}>
         <input type='text' placeholder='Search...' />

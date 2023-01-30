@@ -32,6 +32,16 @@ button:hover {
   margin-left: 20px;
 }
 
+.MyNavbar .left-side .Hamburger {
+  display: none;
+  margin-left: 20px;
+}
+
+.MyNavbar .left-side .Hamburger input {
+  display: none;
+  visibility: hidden;
+}
+
 .MyNavbar .left-side #hidden {
   display: flex;
 }
@@ -69,6 +79,10 @@ button:hover {
   }
 
   .MyNavbar .left-side button {
+    display: flex;
+  }
+
+  .MyNavbar .left-side .Hamburger {
     display: flex;
   }
 
