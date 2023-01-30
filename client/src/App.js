@@ -16,6 +16,7 @@ import AuthContext from './store/auth-context';
 import ProfileDashboard from './pages/ProfileDashboard/ProfileDashboard';
 import MyOrders from './pages/MyOrders/MyOrders';
 import OrderDetailsPage from './pages/OrderDetailsPage/OrderDetailsPage';
+import MyNavbar from './components/Layout/MyNavbar/MyNavbar';
 
 function App() {
   const authCtx = useContext(AuthContext);
@@ -23,7 +24,7 @@ function App() {
 
   const router = createBrowserRouter(
     createRoutesFromElements(
-      <Route path='/' element={<Header />}>
+      <Route path='/' element={<MyNavbar />}>
         <Route index element={<Home />} errorElement={<NotFound />} exact />
         <Route path='/product/:productId' element={<ProductDetailsPage />} />
         <Route
