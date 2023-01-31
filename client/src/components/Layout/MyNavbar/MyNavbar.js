@@ -16,17 +16,22 @@ import { useParams } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
 
 const MyNavbar = () => {
+  const location = useLocation();
   const [showLinks, setShowLinks] = useState(false);
   const authCtx = useContext(AuthContext);
   const cartCtx = useContext(CartContext);
   const isLoggedIn = authCtx.authorized;
   const { data: categories } = useCategoriesQuery();
   const { data: products } = useAllProductsQuery();
-  console.log(useLocation().pathname);
 
   useEffect(() => {
-    setShowLinks(!showLinks);
-  }, [useLocation().pathname]);
+    console.log(location.pathname);
+    if (location !== '/') {
+      setShowLinks(false);
+    } else {
+      setShowLinks(!showLinks);
+    }
+  }, [location.pathname]);
 
   const showCartHandler = () => {
     cartCtx.showCart();
