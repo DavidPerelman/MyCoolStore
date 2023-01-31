@@ -1,7 +1,6 @@
 import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import Card from 'react-bootstrap/Card';
-import Button from 'react-bootstrap/Button';
 import Rating from '../../UI/Rating/Rating';
 import classes from './ProductCard.module.css';
 import CartContext from '../../../store/cart-context';
@@ -47,6 +46,7 @@ const ProductCard = ({ product }) => {
           <Card.Text>{price}</Card.Text>
           {existingCartItemId !== product._id ? (
             <Icon
+              color='black'
               type='fa-solid fa-cart-plus'
               onClick={(e) => addToCartHandler(e)}
               size='lg'
