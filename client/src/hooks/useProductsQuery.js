@@ -1,9 +1,18 @@
 import { useMutation, useQuery, useQueryClient } from 'react-query';
 import {
+  fetchAllProducts,
   fetchAllProductsByCategory,
   fetchContainerProductsByCategory,
   fetchProduct,
 } from '../api/productsApi';
+
+export const useAllProductsQuery = () => {
+  const products = useQuery(['products'], () => {
+    const result = fetchAllProducts();
+    return result;
+  });
+  return products;
+};
 
 export const useProductsQuery = (categoryId) => {
   const products = useQuery(['products', categoryId], () => {

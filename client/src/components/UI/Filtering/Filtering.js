@@ -10,15 +10,17 @@ const Filtering = ({
 }) => {
   return (
     <div className={classes.Filtering}>
-      <input
-        ref={filterInputRef}
-        type='text'
-        placeholder='Search'
-        onChange={(e) => handleChange(e)}
-      />
-      <button className={classes.button} onClick={handleClear}>
-        X
-      </button>
+      <div>
+        <input
+          ref={filterInputRef}
+          type='text'
+          placeholder='Search'
+          onChange={(e) => handleChange(e)}
+        />
+        <button className={classes.button} onClick={handleClear}>
+          X
+        </button>
+      </div>
     </div>
   );
 };

@@ -12,13 +12,15 @@ import User from '../../Users/User/User';
 import Cart from '../../Cart/Cart/Cart';
 import SearchCategory from '../../UI/SearchBar/SearchCategory';
 import SearchProducts from '../../UI/SearchBar/SearchProducts';
+import { useAllProductsQuery } from '../../../hooks/useProductsQuery';
 
 const MyNavbar = () => {
-  const [showLinks, setShowLinks] = useState(true);
+  const [showLinks, setShowLinks] = useState(false);
   const authCtx = useContext(AuthContext);
   const cartCtx = useContext(CartContext);
   const isLoggedIn = authCtx.authorized;
-  const { isLoading, isError, data: categories } = useCategoriesQuery();
+  const { data: categories } = useCategoriesQuery();
+  const { data: products } = useAllProductsQuery();
 
   const showCartHandler = () => {
     cartCtx.showCart();
@@ -44,23 +46,22 @@ const MyNavbar = () => {
       )}
       <div className={classes.MyNavbar}>
         <div className={classes['left-side']}>
-          <Link className={classes['site-title']}>MyCoolStore</Link>
+          <Link className={classes['site-title']} to='/'>
+            MyCoolStore
+          </Link>
         </div>
         <div className={classes['right-side']}>
           <div
             className={classes.links}
             id={showLinks ? classes['hidden'] : ''}
           >
-            {categories && (
-              <SearchProducts
-                data={categories.categories}
-                placeholder='Search'
-              />
+            {products && (
+              <SearchProducts data={products} placeholder='Search Product...' />
             )}
             {categories && (
               <SearchCategory
                 data={categories.categories}
-                placeholder='Search'
+                placeholder='Search Category...'
               />
             )}
           </div>

@@ -1,5 +1,11 @@
 .Filtering {
   text-align-last: center;
+  display: flex;
+  justify-content: center;
+}
+
+.Filtering div {
+  padding-top: 1rem;
 }
 
 .Filtering input {
