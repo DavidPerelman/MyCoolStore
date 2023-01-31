@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import classes from './SearchCategory.module.css';
 
 const SearchCategory = ({ placeholder, data }) => {
+  const navigate = useNavigate();
   const [show, setShow] = useState(false);
   const [filteredData, setfilteredData] = useState(data);
 
@@ -26,6 +27,10 @@ const SearchCategory = ({ placeholder, data }) => {
     setfilteredData(newFilter);
   };
 
+  const dataItemClick = (id) => {
+    navigate(`/products/${id}`);
+  };
+
   return (
     <div className={classes.search}>
       <div className={classes.searchInputs}>
@@ -39,7 +44,11 @@ const SearchCategory = ({ placeholder, data }) => {
       {show && (
         <div className={classes.dataResults}>
           {filteredData.map((value, key) => (
-            <div className={classes.dataItem} key={key}>
+            <div
+              className={classes.dataItem}
+              key={key}
+              onClick={() => dataItemClick(value._id)}
+            >
               <Link to={`/products/${value._id}`}>
                 {value.name.charAt(0).toUpperCase() + value.name.slice(1)}
               </Link>

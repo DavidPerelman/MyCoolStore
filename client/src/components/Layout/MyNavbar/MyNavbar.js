@@ -1,5 +1,4 @@
-import React, { useContext } from 'react';
-import Navbar from 'react-bootstrap/Navbar';
+import React, { useContext, useEffect } from 'react';
 import { Link, Outlet } from 'react-router-dom';
 import classes from './MyNavbar.module.css';
 import Icon from '../../UI/Icon/Icon';
@@ -13,6 +12,8 @@ import Cart from '../../Cart/Cart/Cart';
 import SearchCategory from '../../UI/SearchBar/SearchCategory';
 import SearchProducts from '../../UI/SearchBar/SearchProducts';
 import { useAllProductsQuery } from '../../../hooks/useProductsQuery';
+import { useParams } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 
 const MyNavbar = () => {
   const [showLinks, setShowLinks] = useState(false);
@@ -21,6 +22,11 @@ const MyNavbar = () => {
   const isLoggedIn = authCtx.authorized;
   const { data: categories } = useCategoriesQuery();
   const { data: products } = useAllProductsQuery();
+  console.log(useLocation().pathname);
+
+  useEffect(() => {
+    setShowLinks(!showLinks);
+  }, [useLocation().pathname]);
 
   const showCartHandler = () => {
     cartCtx.showCart();

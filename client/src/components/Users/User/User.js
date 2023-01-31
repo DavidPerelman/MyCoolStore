@@ -11,7 +11,7 @@ const User = ({ onCloseUserModal }) => {
 
   return (
     <Modal onClose={onCloseUserModal}>
-      {isLoggedIn && <LoggedInLayout />}
+      {isLoggedIn && <LoggedInLayout onCloseUserModal={onCloseUserModal} />}
       {!isLoggedIn && <AuthForm onCloseUserModal={onCloseUserModal} />}
     </Modal>
   );
