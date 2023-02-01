@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useRef } from 'react';
 import { Link, Outlet } from 'react-router-dom';
 import classes from './MyNavbar.module.css';
 import Icon from '../../UI/Icon/Icon';
@@ -9,11 +9,9 @@ import CartContext from '../../../store/cart-context';
 import { useCategoriesQuery } from '../../../hooks/useCategoriesQuery';
 import User from '../../Users/User/User';
 import Cart from '../../Cart/Cart/Cart';
-import SearchCategory from '../../UI/SearchBar/SearchCategory';
-import SearchProducts from '../../UI/SearchBar/SearchProducts';
 import { useAllProductsQuery } from '../../../hooks/useProductsQuery';
-import { useParams } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
+import SearchBar from '../../UI/SearchBar/SearchBar';
 
 const MyNavbar = () => {
   const location = useLocation();
@@ -23,9 +21,33 @@ const MyNavbar = () => {
   const isLoggedIn = authCtx.authorized;
   const { data: categories } = useCategoriesQuery();
   const { data: products } = useAllProductsQuery();
+  const searchProductsInputRef = useRef();
+  const searchCategoriesInputRef = useRef();
+  const [searchBar, setSearchBar] = useState(null);
+
+  const handleSearchBar = (id) => {
+    console.log(id);
+    if (searchBar === id || (searchBar && id === undefined)) {
+      setSearchBar(null);
+    }
+    if (searchBar !== id) {
+      setSearchBar(id);
+    }
+
+    if (id === 'categories') {
+      searchProductsInputRef.current.value = '';
+    } else {
+      searchCategoriesInputRef.current.value = '';
+    }
+  };
 
   useEffect(() => {
-    console.log(location.pathname);
+    const handleClick = ({ target }) => {
+      handleSearchBar(target.dataset.id);
+    };
+
+    document.addEventListener('click', handleClick);
+
     if (location !== '/') {
       setShowLinks(false);
     } else {
@@ -67,10 +89,21 @@ const MyNavbar = () => {
             id={showLinks ? classes['hidden'] : ''}
           >
             {products && (
-              <SearchProducts data={products} placeholder='Search Product...' />
+              <SearchBar
+                id='products'
+                searchBar={searchBar}
+                setSearchBar={setSearchBar}
+                searchBarInputRef={searchProductsInputRef}
+                data={products}
+                placeholder='Search Product...'
+              />
             )}
             {categories && (
-              <SearchCategory
+              <SearchBar
+                searchBarInputRef={searchCategoriesInputRef}
+                searchBar={searchBar}
+                setSearchBar={setSearchBar}
+                id='categories'
                 data={categories.categories}
                 placeholder='Search Category...'
               />

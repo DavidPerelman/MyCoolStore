@@ -1,3 +1,7 @@
+#SearchCategoryInput-dataResults {
+  visibility: hidden;
+}
+
 .site-title {
   color: #ffffff !important;
   font-weight: bold;
@@ -22,6 +26,7 @@ button:hover {
   display: flex;
   justify-content: left;
   align-items: center;
+  margin-right: 1rem;
 }
 
 .MyNavbar .right-side .links {
@@ -38,7 +43,7 @@ button:hover {
 }
 
 .MyNavbar .right-side button {
-  display: none;
+  /* display: none; */
   margin-left: 20px;
 }
 
@@ -129,5 +134,9 @@ button:hover {
   .MyNavbar .right-side #hidden a {
     margin: 10px;
     font-size: 15px;
+  }
+
+  .MyNavbar .left-side {
+    margin-right: 0;
   }
 }
