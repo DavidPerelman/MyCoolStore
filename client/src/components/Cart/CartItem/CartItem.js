@@ -6,7 +6,12 @@ const CartItem = ({ item, onAdd, onRemove }) => {
   return (
     <li key={item._id} className={classes['cart-item']}>
       <div className={classes['cart-product-details']}>
-        <img className={classes['cart-image']} src={item.product.thumbnail} />
+        <img
+          alt={item.product.title}
+          className={classes['cart-image']}
+          src={item.product.thumbnail}
+          loading='lazy'
+        />
         <div>
           <h3>{item.product.title}</h3>
           <div className={classes.summary}>

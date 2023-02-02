@@ -1,6 +1,6 @@
 import React from 'react';
 import classes from './CategoryProductsPage.module.css';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { useCategoryTitleQuery } from '../../hooks/useCategoriesQuery';
 import { useProductsQuery } from '../../hooks/useProductsQuery';
 import Row from 'react-bootstrap/Row';
@@ -10,7 +10,6 @@ import LoadingSpinner from '../../components/UI/LoadingSpinner/LoadingSpinner';
 
 const CategoryProductsPage = () => {
   const { categoryId } = useParams();
-  const navigate = useNavigate();
 
   const { data: categoryName } = useCategoryTitleQuery(categoryId);
   const { isLoading, error, data: products } = useProductsQuery(categoryId);

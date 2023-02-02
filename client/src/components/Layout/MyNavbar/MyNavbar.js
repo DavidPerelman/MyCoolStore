@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useRef } from 'react';
+import React, { useContext, useEffect, useRef, lazy, Suspense } from 'react';
 import { Link, Outlet } from 'react-router-dom';
 import classes from './MyNavbar.module.css';
 import Icon from '../../UI/Icon/Icon';
@@ -11,7 +11,8 @@ import User from '../../Users/User/User';
 import Cart from '../../Cart/Cart/Cart';
 import { useAllProductsQuery } from '../../../hooks/useProductsQuery';
 import { useLocation } from 'react-router-dom';
-import SearchBar from '../../UI/SearchBar/SearchBar';
+
+const SearchBar = lazy(() => import('../../UI/SearchBar/SearchBar'));
 
 const MyNavbar = () => {
   const location = useLocation();
@@ -26,7 +27,6 @@ const MyNavbar = () => {
   const [searchBar, setSearchBar] = useState(null);
 
   const handleSearchBar = (id) => {
-    console.log(id);
     if (searchBar === id || (searchBar && id === undefined)) {
       setSearchBar(null);
     }
@@ -89,24 +89,28 @@ const MyNavbar = () => {
             id={showLinks ? classes['hidden'] : ''}
           >
             {products && (
-              <SearchBar
-                id='products'
-                searchBar={searchBar}
-                setSearchBar={setSearchBar}
-                searchBarInputRef={searchProductsInputRef}
-                data={products}
-                placeholder='Search Product...'
-              />
+              <Suspense>
+                <SearchBar
+                  id='products'
+                  searchBar={searchBar}
+                  setSearchBar={setSearchBar}
+                  searchBarInputRef={searchProductsInputRef}
+                  data={products}
+                  placeholder='Search Product...'
+                />
+              </Suspense>
             )}
             {categories && (
-              <SearchBar
-                searchBarInputRef={searchCategoriesInputRef}
-                searchBar={searchBar}
-                setSearchBar={setSearchBar}
-                id='categories'
-                data={categories.categories}
-                placeholder='Search Category...'
-              />
+              <Suspense>
+                <SearchBar
+                  searchBarInputRef={searchCategoriesInputRef}
+                  searchBar={searchBar}
+                  setSearchBar={setSearchBar}
+                  id='categories'
+                  data={categories.categories}
+                  placeholder='Search Category...'
+                />
+              </Suspense>
             )}
           </div>
           <div className={classes.icons}>
@@ -136,4 +140,4 @@ const MyNavbar = () => {
   );
 };
 
-export default MyNavbar;
+export default React.memo(MyNavbar);

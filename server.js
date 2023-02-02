@@ -47,6 +47,12 @@ app.get('/', function (req, res) {
   res.send('<h1>Hello Server</h1>');
 });
 
+// app.use(express.static(path.join(__dirname, './client/build')));
+
+// app.get('/*', function (req, res) {
+//   res.sendFile(path.join(__dirname, './client/build/index.html'));
+// });
+
 const PORT = 8080 || process.env.PORT;
 
 app.listen(PORT, () => {

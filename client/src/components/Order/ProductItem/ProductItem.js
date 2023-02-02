@@ -12,6 +12,7 @@ const ProductItem = ({ product, amount, editable, onAdd, onRemove }) => {
             className={classes['order-image']}
             src={product.thumbnail}
             alt={product.title}
+            loading='lazy'
           />
         </div>
         <div className={classes.content}>

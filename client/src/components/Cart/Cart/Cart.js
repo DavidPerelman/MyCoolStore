@@ -1,9 +1,10 @@
-import React, { useContext } from 'react';
+import React, { useContext, lazy, Suspense } from 'react';
 import AuthContext from '../../../store/auth-context';
 import CartContext from '../../../store/cart-context';
-import Modal from '../../UI/Modal/Modal';
 import CartItem from '../CartItem/CartItem';
 import classes from './Cart.module.css';
+
+const Modal = lazy(() => import('../../UI/Modal/Modal'));
 
 const Cart = ({ onCloseCart }) => {
   const cartCtx = useContext(CartContext);
@@ -40,27 +41,29 @@ const Cart = ({ onCloseCart }) => {
   );
 
   return (
-    <Modal onClose={onCloseCart}>
-      {!authCtx.authorized && <p>You must be logged in to place an order!</p>}
-      {cartItems}
-      <div className={classes.total}>
-        <span>Total Amount</span>
-        <span>{totalAmount}</span>
-      </div>
-      <div className={classes.actions}>
-        <button className={classes['button--alt']} onClick={onCloseCart}>
-          Close
-        </button>
-        {hasItems && authCtx.authorized && (
-          <button
-            className={classes.button}
-            onClick={() => cartCtx.makeAnOrderClick(authCtx, cartCtx.items)}
-          >
-            Order
+    <Suspense>
+      <Modal onClose={onCloseCart}>
+        {!authCtx.authorized && <p>You must be logged in to place an order!</p>}
+        {cartItems}
+        <div className={classes.total}>
+          <span>Total Amount</span>
+          <span>{totalAmount}</span>
+        </div>
+        <div className={classes.actions}>
+          <button className={classes['button--alt']} onClick={onCloseCart}>
+            Close
           </button>
-        )}
-      </div>
-    </Modal>
+          {hasItems && authCtx.authorized && (
+            <button
+              className={classes.button}
+              onClick={() => cartCtx.makeAnOrderClick(authCtx, cartCtx.items)}
+            >
+              Order
+            </button>
+          )}
+        </div>
+      </Modal>
+    </Suspense>
   );
 };
 

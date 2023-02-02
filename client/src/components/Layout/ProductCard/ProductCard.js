@@ -33,6 +33,7 @@ const ProductCard = ({ product }) => {
           src={product.thumbnail}
           className='card-img-top'
           alt={product.title}
+          loading='lazy'
         />
       </Link>
       <Card.Body className={classes['card-body']}>

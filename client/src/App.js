@@ -1,7 +1,5 @@
+import React, { lazy, Suspense } from 'react';
 import Home from './pages/Home/Home';
-import NotFound from './pages/NotFound/NotFound';
-import ProductDetailsPage from './pages/ProductDetailsPage/ProductDetailsPage';
-import Header from './components/Layout/Header/Header';
 import {
   Route,
   RouterProvider,
@@ -10,13 +8,23 @@ import {
 } from 'react-router-dom';
 import { CartContextProvider } from './store/cart-context';
 import { OrderContextProvider } from './store/order-context';
-import CategoryProductsPage from './pages/CategoryProductsPage/CategoryProductsPage';
 import { useContext } from 'react';
 import AuthContext from './store/auth-context';
-import ProfileDashboard from './pages/ProfileDashboard/ProfileDashboard';
-import MyOrders from './pages/MyOrders/MyOrders';
-import OrderDetailsPage from './pages/OrderDetailsPage/OrderDetailsPage';
 import MyNavbar from './components/Layout/MyNavbar/MyNavbar';
+const NotFound = lazy(() => import('./pages/NotFound/NotFound'));
+const ProfileDashboard = lazy(() =>
+  import('./pages/ProfileDashboard/ProfileDashboard')
+);
+const OrderDetailsPage = lazy(() =>
+  import('./pages/OrderDetailsPage/OrderDetailsPage')
+);
+const CategoryProductsPage = lazy(() =>
+  import('./pages/CategoryProductsPage/CategoryProductsPage')
+);
+const ProductDetailsPage = lazy(() =>
+  import('./pages/ProductDetailsPage/ProductDetailsPage')
+);
+const MyOrders = lazy(() => import('./pages/MyOrders/MyOrders'));
 
 function App() {
   const authCtx = useContext(AuthContext);
@@ -25,21 +33,71 @@ function App() {
   const router = createBrowserRouter(
     createRoutesFromElements(
       <Route path='/' element={<MyNavbar />}>
-        <Route index element={<Home />} errorElement={<NotFound />} exact />
-        <Route path='/product/:productId' element={<ProductDetailsPage />} />
         <Route
-          path='/products/:categoryId'
-          element={<CategoryProductsPage />}
+          index
+          element={<Home />}
+          errorElement={
+            <Suspense>
+              <NotFound />
+            </Suspense>
+          }
           exact
         />
-        {isLoggedIn && <Route path='/my-orders' element={<MyOrders />} />}
+        <Route
+          path='/product/:productId'
+          element={
+            <Suspense>
+              <ProductDetailsPage />
+            </Suspense>
+          }
+        />
+        <Route
+          path='/products/:categoryId'
+          element={
+            <Suspense>
+              <CategoryProductsPage />
+            </Suspense>
+          }
+          exact
+        />
         {isLoggedIn && (
-          <Route path='/order/:orderId' element={<OrderDetailsPage />} />
+          <Route
+            path='/my-orders'
+            element={
+              <Suspense>
+                <MyOrders />
+              </Suspense>
+            }
+          />
         )}
         {isLoggedIn && (
-          <Route path='/:userId/dashboard' element={<ProfileDashboard />} />
+          <Route
+            path='/order/:orderId'
+            element={
+              <Suspense>
+                <OrderDetailsPage />
+              </Suspense>
+            }
+          />
         )}
-        <Route path='/*' element={<NotFound />} />
+        {isLoggedIn && (
+          <Route
+            path='/:userId/dashboard'
+            element={
+              <Suspense>
+                <ProfileDashboard />
+              </Suspense>
+            }
+          />
+        )}
+        <Route
+          path='/*'
+          element={
+            <Suspense>
+              <NotFound />
+            </Suspense>
+          }
+        />
       </Route>
     )
   );
